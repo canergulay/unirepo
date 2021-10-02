@@ -1,5 +1,18 @@
-abstract class IFirebaseEntity<T> {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unirepo/core/components/models/base_from_json.dart';
+
+abstract class IFirebaseEntity<T extends BaseResponseContract> {
+  final T responseType;
   final String collectionName;
-  Future<List<T>> desiredReturn();
-  IFirebaseEntity(this.collectionName);
+  late final instance;
+
+  IFirebaseEntity(this.collectionName, this.responseType) {
+    instance = FirebaseFirestore.instance
+        .collection(collectionName)
+        .withConverter(fromFirestore: (snapshot, _) => responseType.fromJson(snapshot.data()), toFirestore: (type, _) => responseType.toJson());
+  }
+  Future<List<T>> getDocuments() async {
+    List<T> items = await instance.get();
+    return items;
+  }
 }
