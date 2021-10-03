@@ -1,11 +1,14 @@
+import 'package:hive/hive.dart';
 import 'package:unirepo/core/components/models/map_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'university.g.dart';
 
-@JsonSerializable()
-class University implements MapConverter {
+@HiveType(typeId: 0)
+class University extends HiveObject implements MapConverter {
+  @HiveField(0)
   final String? name;
+  @HiveField(1)
   final int? id;
   University({this.id, this.name});
 
