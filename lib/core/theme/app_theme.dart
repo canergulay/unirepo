@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unirepo/core/theme/color_manager.dart';
 import 'package:unirepo/core/theme/light/text/light_text.dart';
-import 'package:unirepo/core/theme/text_teheme.dart';
+import 'package:unirepo/core/theme/text_theme.dart';
 
 abstract class ITheme {
   ITextTheme get textTheme;

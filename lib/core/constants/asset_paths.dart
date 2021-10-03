@@ -5,4 +5,5 @@ class AssetPaths {
 
   final String home = "assets/icons/home.png";
   final String user = "assets/icons/user.png";
+  final String search = "assets/icons/search.png";
 }

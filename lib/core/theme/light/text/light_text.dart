@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../text_teheme.dart';
+import '../../text_theme.dart';
 
 class TextThemeLight implements ITextTheme {
   @override
@@ -38,9 +38,9 @@ class TextThemeLight implements ITextTheme {
     data = TextTheme(
       headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
       subtitle1: TextStyle(fontSize: 16.0),
-    ).apply(bodyColor: primaryColor);
+    ).apply(bodyColor: Colors.black);
   }
 
   @override
-  String? fontFamily;
+  String? fontFamily = 'montserrat';
 }

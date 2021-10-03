@@ -16,6 +16,6 @@ class University extends BaseResponseContract<University> {
   @override
   University fromJson(Map<String, dynamic>? json) {
     // TODO: implement fromJson
-    throw UnimplementedError();
+    return University.fromJson(json ?? {});
   }
 }

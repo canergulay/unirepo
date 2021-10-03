@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unirepo/core/constants/palette.dart';
-import 'package:unirepo/features/landing/widgets/appbar.dart';
+import 'package:unirepo/features/home/presentation/pages/home_screen.dart';
+import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
+import 'package:unirepo/features/landing/screens.dart';
 import 'package:unirepo/features/landing/widgets/bottom_navigation_bar/bototm_navigation_provider.dart';
 import 'package:unirepo/features/landing/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
 
@@ -10,15 +11,15 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<BottomNavigationProvider>(
-      create: (context) => BottomNavigationProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SearchBarProvider>(create: (_) => SearchBarProvider()),
+        ChangeNotifierProvider<BottomNavigationProvider>(create: (_) => BottomNavigationProvider())
+      ],
       child: Consumer<BottomNavigationProvider>(builder: (context, provider, w) {
         return Scaffold(
-          appBar: appBar(),
           bottomNavigationBar: CustomBottomNavigationBar(),
-          body: Column(
-            children: [],
-          ),
+          body: AppScreens.call()[provider.bottomNavigationState],
         );
       }),
     );

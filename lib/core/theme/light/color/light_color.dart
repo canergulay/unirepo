@@ -22,7 +22,7 @@ class LightColors implements IColors {
   Color? tabbarSelectedColor;
 
   LightColors() {
-    appBarColor = const Color(0xFF25c5f9);
+    appBarColor = const Color(0xFF66ABFE);
     scaffoldBackgroundColor = const Color(0xFFededed);
     tabBarColor = colors.green;
     tabbarNormalColor = colors.darkerGrey;
@@ -30,7 +30,7 @@ class LightColors implements IColors {
     bottomNavBarBackGround = Colors.white;
     bottomNavBarSelected = const Color(0xFF4a4a4a);
     bottomNavBarUnSelected = const Color(0xFFdbdbdb);
-    colorScheme = const ColorScheme.light().copyWith(onPrimary: colors.green, onSecondary: colors.white, onSurface: colors.mediumGreyBold);
+    colorScheme = const ColorScheme.light().copyWith(onPrimary: Colors.black12, onSecondary: colors.white, onSurface: colors.mediumGreyBold);
     brightness = Brightness.light;
   }
 
