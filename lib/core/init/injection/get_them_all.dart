@@ -8,5 +8,5 @@ final injector = GetIt.instance;
 void setUp() {
   injector.registerLazySingleton<GetAllUniversities>(() => GetAllUniversities(getAllUniversitiesRepositary: injector()));
   injector.registerLazySingleton<GetAllUniversitiesRepositary>(() => GetAllUniversitiesRepositary(readUnivercities: injector()));
-  injector.registerLazySingleton<ReadUnivercities>(() => ReadUnivercities());
+  injector.registerLazySingleton<ReadUniversities>(() => ReadUniversities());
 }

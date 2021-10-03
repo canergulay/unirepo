@@ -10,6 +10,8 @@ class SearchMobx = _SearchMobx with _$SearchMobx;
 
 abstract class _SearchMobx with Store {
   final GetAllUniversities _getAllUniversities = injector.get<GetAllUniversities>();
+  bool isDatasFetched = false;
+
   @observable
   List<University> _universities = [];
 

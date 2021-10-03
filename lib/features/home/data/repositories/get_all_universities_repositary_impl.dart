@@ -5,7 +5,7 @@ import 'package:firebase_core_platform_interface/firebase_core_platform_interfac
 import 'package:unirepo/features/home/domain/repositories/get_all_schools_repositary.dart';
 
 class GetAllUniversitiesRepositary implements GetAllUniversitiesRepositaryContract {
-  ReadUnivercities readUnivercities;
+  ReadUniversities readUnivercities;
   GetAllUniversitiesRepositary({required this.readUnivercities});
   @override
   Future<Result<List<University>, Exception>> getAllUniversities() async {
