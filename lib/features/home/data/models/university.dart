@@ -1,10 +1,10 @@
-import 'package:unirepo/core/components/models/base_from_json.dart';
+import 'package:unirepo/core/components/models/map_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'university.g.dart';
 
 @JsonSerializable()
-class University extends BaseResponseContract<University> {
+class University extends MapConverter {
   final String? name;
   final int? id;
   University({this.id, this.name});

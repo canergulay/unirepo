@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:unirepo/core/components/models/base_from_json.dart';
+import 'package:unirepo/core/components/models/map_converter.dart';
 
-abstract class FirebaseGetController<T extends BaseResponseContract> {
+class FirebaseGetController<T extends MapConverter> {
   final T responseType;
   final String collectionName;
   late final instance;
@@ -12,7 +12,10 @@ abstract class FirebaseGetController<T extends BaseResponseContract> {
         .withConverter(fromFirestore: (snapshot, _) => responseType.fromJson(snapshot.data()), toFirestore: (type, _) => responseType.toJson());
   }
   Future<List<T>> getDocuments() async {
-    List<T> items = await instance.get();
-    return items;
+    final response = await FirebaseFirestore.instance
+        .collection(collectionName)
+        .withConverter(fromFirestore: (snapshot, _) => responseType.fromJson(snapshot.data()), toFirestore: (type, _) => responseType.toJson())
+        .get();
+    return (response.docs.map((e) => e.data() as T).toList());
   }
 }
