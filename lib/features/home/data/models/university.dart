@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'university.g.dart';
 
 @JsonSerializable()
-class University extends MapConverter {
+class University implements MapConverter {
   final String? name;
   final int? id;
   University({this.id, this.name});

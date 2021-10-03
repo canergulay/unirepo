@@ -11,7 +11,8 @@ University _$UniversityFromJson(Map<String, dynamic> json) => University(
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$UniversityToJson(University instance) => <String, dynamic>{
+Map<String, dynamic> _$UniversityToJson(University instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
     };

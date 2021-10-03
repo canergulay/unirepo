@@ -11,11 +11,4 @@ class FirebaseGetController<T extends MapConverter> {
         .collection(collectionName)
         .withConverter(fromFirestore: (snapshot, _) => responseType.fromJson(snapshot.data()), toFirestore: (type, _) => responseType.toJson());
   }
-  Future<List<T>> getDocuments() async {
-    final response = await FirebaseFirestore.instance
-        .collection(collectionName)
-        .withConverter(fromFirestore: (snapshot, _) => responseType.fromJson(snapshot.data()), toFirestore: (type, _) => responseType.toJson())
-        .get();
-    return (response.docs.map((e) => e.data() as T).toList());
-  }
 }

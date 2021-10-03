@@ -10,7 +10,11 @@ class GetAllUniversitiesRepositary implements GetAllUniversitiesRepositaryContra
   @override
   Future<Result<List<University>, Exception>> getAllUniversities() async {
     try {
-      final List<University> docResult = await readUnivercities.getDocuments();
+      final List<University> docResult = await readUnivercities.getDocuments(
+        responseType: readUnivercities.responseType,
+        collectionName: readUnivercities.collectionName,
+        orderByField: 'id',
+      );
       return Result.success(docResult);
     } catch (e) {
       print(e);

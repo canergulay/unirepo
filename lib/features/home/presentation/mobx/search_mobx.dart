@@ -11,13 +11,16 @@ class SearchMobx = _SearchMobx with _$SearchMobx;
 abstract class _SearchMobx with Store {
   final GetAllUniversities _getAllUniversities = injector.get<GetAllUniversities>();
   @observable
-  List<University> universities = [];
+  List<University> _universities = [];
+
+  List<University> get universities => _universities;
 
   @action
-  Future<void> getTall() async {
-    Result<List<University>, Exception> queryResult = await _getAllUniversities.call();
-    queryResult.when(success: (a) {
-      print(a);
+  Future<void> getTall(String query) async {
+    Result<List<University>, Exception> queryResult = await _getAllUniversities();
+    queryResult.when(success: (List<University> a) {
+      print(a.length);
+      _universities = a;
     }, error: (Exception e) {
       print(e);
     });

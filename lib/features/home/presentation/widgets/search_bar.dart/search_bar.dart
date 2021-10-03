@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/buttons/animator_button.dart';
@@ -72,7 +73,7 @@ Widget buildFloatingSearchBar(BuildContext context) {
           width: isPortrait ? 600 : 500,
           debounceDelay: const Duration(milliseconds: 500),
           onQueryChanged: (query) {
-            Provider.of<SearchMobx>(context, listen: false).getTall();
+            Provider.of<SearchMobx>(context, listen: false).getTall(query);
             print(query);
             // Call your model, bloc, controller here.
           },
@@ -97,12 +98,24 @@ Widget buildFloatingSearchBar(BuildContext context) {
               child: Material(
                 color: Colors.white,
                 elevation: 4.0,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: Colors.accents.map((color) {
-                    return Container(height: 112, color: color);
-                  }).toList(),
-                ),
+                child: Observer(builder: (context) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: Provider.of<SearchMobx>(
+                      context,
+                      listen: false,
+                    )
+                        .universities
+                        .map((e) => Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Text(
+                                e.name ?? '',
+                                textAlign: TextAlign.center,
+                              ),
+                            ))
+                        .toList(),
+                  );
+                }),
               ),
             );
           });
