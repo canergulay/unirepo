@@ -8,7 +8,7 @@ class HiveManager {
 
   Future<bool?> isUniversitiesCached() async {
     final box = await Hive.openBox(AppConstants.shared.hiveAppBox);
-    bool? isCached = box.get('iscached');
+    bool? isCached = box.get(AppConstants.shared.isCached);
     return isCached;
   }
 
@@ -21,25 +21,43 @@ class HiveManager {
     await hiveBox.close();
   }
 
-  Future<void> put({required String boxName, required key, required Object value}) async {
-    final box = await Hive.openBox(boxName);
+  Future<void> put<T>({required String boxName, required key, required T value}) async {
+    late final box;
+    if (Hive.isBoxOpen(boxName)) {
+      box = Hive.box(boxName);
+    } else {
+      box = await Hive.openBox(boxName);
+    }
     box.put(key, value);
   }
 
   Future<List<T>> getAll<T>({required String boxName}) async {
     final box = Hive.box(boxName);
+    print('heyyoo');
+    print(box.length);
     final List<T> _listToReturn = [];
     for (int i = 0; i < box.length; i++) {
       final value = await box.getAt(i);
       _listToReturn.add(value);
     }
+    print('returndan onceli son yer');
     return _listToReturn;
   }
 
   Future<void> putAll<T>({required String boxName, required List<T> listToBePut}) async {
     final box = Hive.box(boxName);
     for (int i = 0; i < listToBePut.length; i++) {
-      box.putAt(i, listToBePut[i]);
+      box.put(i, listToBePut[i]);
+    }
+    print(box.length);
+  }
+
+  void clearBox({required String boxName}) {
+    bool isBoxOpen = Hive.isBoxOpen(boxName);
+    if (isBoxOpen) {
+      Hive.box(boxName).clear();
+    } else {
+      Hive.openBox(boxName).then((box) => box.clear());
     }
   }
 

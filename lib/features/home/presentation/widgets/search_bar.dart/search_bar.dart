@@ -73,7 +73,7 @@ Widget buildFloatingSearchBar(BuildContext context) {
           width: isPortrait ? 600 : 500,
           debounceDelay: const Duration(milliseconds: 500),
           onQueryChanged: (query) {
-            Provider.of<SearchMobx>(context, listen: false).getTall(query);
+            Provider.of<SearchMobx>(context, listen: false).triggerFetching(query);
             print(query);
             // Call your model, bloc, controller here.
           },

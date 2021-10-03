@@ -4,15 +4,18 @@ import 'package:unirepo/features/home/data/models/university.dart';
 
 class GetCachedUniversitiesLocalDataSource {
   Future<List<University>> getCachedUniversities() async {
+    print('burası');
     await HiveManager.instance.openBox(
       boxName: AppConstants.shared.hiveUniverSitiesBox,
     );
     List<University> _universities = await HiveManager.instance.getAll<University>(
       boxName: AppConstants.shared.hiveUniverSitiesBox,
     );
+    print('sasa');
     await HiveManager.instance.closeBox(
       boxName: AppConstants.shared.hiveUniverSitiesBox,
     );
+
     return _universities;
   }
 

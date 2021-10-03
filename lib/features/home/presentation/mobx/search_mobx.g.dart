@@ -24,11 +24,12 @@ mixin _$SearchMobx on _SearchMobx, Store {
     });
   }
 
-  final _$getTallAsyncAction = AsyncAction('_SearchMobx.getTall');
+  final _$triggerFetchingAsyncAction =
+      AsyncAction('_SearchMobx.triggerFetching');
 
   @override
-  Future<void> getTall(String query) {
-    return _$getTallAsyncAction.run(() => super.getTall(query));
+  Future<void> triggerFetching(String query) {
+    return _$triggerFetchingAsyncAction.run(() => super.triggerFetching(query));
   }
 
   @override
