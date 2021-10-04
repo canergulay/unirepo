@@ -14,7 +14,6 @@ class SearchMobx = _SearchMobx with _$SearchMobx;
 abstract class _SearchMobx with Store {
   final GetAllUniversities _getAllUniversities = injector.get<GetAllUniversities>();
   final CacheRetrieveUniversities _cacheRetrieveUniversities = injector.get<CacheRetrieveUniversities>();
-  bool _isDatasFetched = false;
   bool _isCachedDataControlled = false;
 
   late final _universitiesStored;
@@ -54,7 +53,6 @@ abstract class _SearchMobx with Store {
           _cacheFetchedUniversities(universitiesFetched);
         },
         error: (Exception e) {});
-    _isDatasFetched = true;
   }
 
   void _ifCached() async {
@@ -69,16 +67,15 @@ abstract class _SearchMobx with Store {
 
   void _cacheFetchedUniversities(List<University> universities) async {
     Result<bool, Exception> result = await _cacheRetrieveUniversities.cacheUniversities(universities);
-    result.when(success: (bool result) {
-      print(result);
-      HiveManager.instance.put<bool>(
-        boxName: AppConstants.shared.hiveAppBox,
-        key: AppConstants.shared.isCached,
-        value: true,
-      );
-    }, error: (Exception e) {
-      print(e);
-    });
+    result.when(
+        success: (bool result) {
+          HiveManager.instance.put<bool>(
+            boxName: AppConstants.shared.hiveAppBox,
+            key: AppConstants.shared.hiveIsCachedKey,
+            value: true,
+          );
+        },
+        error: (Exception e) {});
   }
 
   void _setUniversities(List<University> universities) {

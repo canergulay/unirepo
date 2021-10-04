@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/buttons/animator_button.dart';
+import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/features/home/data/models/university.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
@@ -23,16 +25,25 @@ class SearchBar extends StatelessWidget {
           ),
           Expanded(
               flex: 15,
-              child: Consumer<SearchBarProvider>(builder: (context, _, __) {
+              child: Consumer<SearchBarProvider>(builder: (context, provider, __) {
                 return Column(
                   children: [
-                    Expanded(child: buildFloatingSearchBar(context)),
+                    Expanded(child: searchBarChildGetter(context, provider)),
                   ],
                 );
               })),
         ],
       );
     });
+  }
+
+  Widget searchBarChildGetter(BuildContext context, SearchBarProvider provider) {
+    if (!provider.isUniversityPicked) {
+      print('yeah');
+      return buildFloatingSearchBar(context);
+    } else {
+      return Text(provider.universityPicked.name ?? '');
+    }
   }
 
   AnimatorButton optionButton(BuildContext context, {required SearchBarState myIndex, required double padding, required String text}) {
@@ -121,17 +132,24 @@ Observer mobxObserver() {
       children: Provider.of<SearchMobx>(
         context,
         listen: false,
-      ).universities.map((e) => searchChildContainer(e)).toList(),
+      ).universities.map((e) => searchChildContainer(e, context)).toList(),
     );
   });
 }
 
-Container searchChildContainer(University e) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 12),
-    child: Text(
-      e.name ?? '',
-      textAlign: TextAlign.center,
+AnimatorButton searchChildContainer(University university, BuildContext context) {
+  return AnimatorButton(
+    upperBound: 0.25,
+    onPressed: () {
+      context.read<SearchBarProvider>().pickUniversity(university, context);
+    },
+    childToBeAnimated: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Text(
+        university.name ?? '',
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.headline6?.copyWith(fontSize: context.limitedheightUnit * 2.31),
+      ),
     ),
   );
 }

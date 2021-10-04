@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: const [SearchBar()],
+      children: [SearchBar()],
     );
   }
 }

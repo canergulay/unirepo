@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/features/home/data/models/university.dart';
 
 class HiveManager {
   static HiveManager _instace = HiveManager._init();
@@ -8,7 +9,7 @@ class HiveManager {
 
   Future<bool?> isUniversitiesCached() async {
     final box = await Hive.openBox(AppConstants.shared.hiveAppBox);
-    bool? isCached = box.get(AppConstants.shared.isCached);
+    bool? isCached = box.get(AppConstants.shared.hiveIsCachedKey);
     return isCached;
   }
 
@@ -61,5 +62,21 @@ class HiveManager {
     }
   }
 
-  Future<dynamic> get({required String boxName, required String key}) async {}
+  Future<void> pickUniversity(University university) async {
+    final box = Hive.box(AppConstants.shared.hivePickedUniversityBox);
+    await box.put(
+      AppConstants.shared.hivePickedUniversityNameKey,
+      university.name,
+    );
+    await box.put(
+      AppConstants.shared.hivePickedUniversityidKey,
+      university.id,
+    );
+
+    print(box.length);
+  }
+
+  Future<dynamic> get({required String boxName, required String key}) async {
+    return await Hive.box(boxName).get(key);
+  }
 }
