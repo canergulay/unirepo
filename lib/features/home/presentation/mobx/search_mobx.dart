@@ -17,6 +17,8 @@ abstract class _SearchMobx with Store {
   bool _isDatasFetched = false;
   bool _isCachedDataControlled = false;
 
+  late final _universitiesStored;
+
   @observable
   List<University> _universities = [];
 
@@ -27,19 +29,12 @@ abstract class _SearchMobx with Store {
     if (!_isCachedDataControlled) {
       bool _isCached = await _checkDataIsCached();
       if (_isCached) {
-        print('evet daha önce cachelenmiş');
         _ifCached();
       } else {
-        print('yok cache felan');
         _fetcDatas();
       }
     } else {
-      print('aruyorz');
-      final List<University>? filteredUniversities =
-          _universities.where((element) => (element.name!.contains(query) || element.name!.contains(query.toUpperCase()))).toList();
-      if (filteredUniversities?.isNotEmpty ?? false) {
-        _universities = filteredUniversities!;
-      }
+      _searchAmongUniversities(query);
     }
   }
 
@@ -55,7 +50,7 @@ abstract class _SearchMobx with Store {
     Result<List<University>, Exception> queryResult = await _getAllUniversities();
     queryResult.when(
         success: (List<University> universitiesFetched) {
-          _universities = universitiesFetched;
+          _setUniversities(universitiesFetched);
           _cacheFetchedUniversities(universitiesFetched);
         },
         error: (Exception e) {});
@@ -65,13 +60,11 @@ abstract class _SearchMobx with Store {
   void _ifCached() async {
     _isCachedDataControlled = true;
     final Result<List<University>, Exception> _cachedUniversities = await _cacheRetrieveUniversities.getCachedUniversities();
-    _cachedUniversities.when(success: (List<University> universities) {
-      _universities = universities;
-      print(_universities.length);
-    }, error: (Exception e) {
-      print('yedin');
-      print(e);
-    });
+    _cachedUniversities.when(
+        success: (List<University> universitiesCached) {
+          _setUniversities(universitiesCached);
+        },
+        error: (Exception e) {});
   }
 
   void _cacheFetchedUniversities(List<University> universities) async {
@@ -87,6 +80,40 @@ abstract class _SearchMobx with Store {
       print(e);
     });
   }
+
+  void _setUniversities(List<University> universities) {
+    _universitiesStored = universities;
+    _universities = universities;
+  }
+
+  void _resetUniversities() {
+    _universities = _universitiesStored;
+  }
+
+  void _searchAmongUniversities(String query) {
+    if (query.length < 3) {
+      _resetUniversities();
+    } else {
+      final List<University>? filteredUniversities = _universitiesStored
+          .where(
+            (element) => (checkIfContainsQuery(element, query) ?? false),
+          )
+          .toList();
+      if (filteredUniversities?.isNotEmpty ?? false) {
+        _universities = filteredUniversities!;
+      } else {
+        _resetUniversities();
+      }
+    }
+  }
+
+  bool? checkIfContainsQuery(University university, String query) {
+    return university.name!.contains(query.trim()) || university.name!.contains(queryIconverter(query).trim());
+  }
+}
+
+String queryIconverter(String query) {
+  return query.toUpperCase().replaceAll('I', 'İ');
 }
 
 bool equalsIgnoreCase(String string1, String string2) {

@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/buttons/animator_button.dart';
+import 'package:unirepo/features/home/data/models/university.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
@@ -69,13 +70,16 @@ Widget buildFloatingSearchBar(BuildContext context) {
           physics: const BouncingScrollPhysics(),
           leadingActions: [labelAnimatorText(context)],
           axisAlignment: isPortrait ? 0.0 : -1.0,
+          onFocusChanged: (bool) {
+            if (true) {
+              context.read<SearchMobx>().triggerFetching('');
+            }
+          },
           openAxisAlignment: 0.0,
           width: isPortrait ? 600 : 500,
           debounceDelay: const Duration(milliseconds: 500),
           onQueryChanged: (query) {
             Provider.of<SearchMobx>(context, listen: false).triggerFetching(query);
-            print(query);
-            // Call your model, bloc, controller here.
           },
           // Specify a custom transition to be used for
           // animating between opened and closed stated.
@@ -93,33 +97,42 @@ Widget buildFloatingSearchBar(BuildContext context) {
             ),
           ],
           builder: (context, transition) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Material(
-                color: Colors.white,
-                elevation: 4.0,
-                child: Observer(builder: (context) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: Provider.of<SearchMobx>(
-                      context,
-                      listen: false,
-                    )
-                        .universities
-                        .map((e) => Container(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                e.name ?? '',
-                                textAlign: TextAlign.center,
-                              ),
-                            ))
-                        .toList(),
-                  );
-                }),
-              ),
-            );
+            return buildItem();
           });
     }),
+  );
+}
+
+ClipRRect buildItem() {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(8),
+    child: Material(
+      color: Colors.white,
+      elevation: 4.0,
+      child: mobxObserver(),
+    ),
+  );
+}
+
+Observer mobxObserver() {
+  return Observer(builder: (context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: Provider.of<SearchMobx>(
+        context,
+        listen: false,
+      ).universities.map((e) => searchChildContainer(e)).toList(),
+    );
+  });
+}
+
+Container searchChildContainer(University e) {
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    child: Text(
+      e.name ?? '',
+      textAlign: TextAlign.center,
+    ),
   );
 }
 
