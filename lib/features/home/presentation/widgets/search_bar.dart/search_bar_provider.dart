@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
+import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
+import 'package:unirepo/features/home/data/models/course_prefix/course_prefix_result.dart';
 import 'package:unirepo/features/home/data/models/university.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 
 class SearchBarProvider extends ChangeNotifier {
+  CoursePrefixState coursePrefixState = const CoursePrefixState.loading();
+
   final GetSupportedPrefices getSupportedPrefices;
   bool isUniversityPicked = false;
   late final University universityPicked;
@@ -64,9 +69,10 @@ class SearchBarProvider extends ChangeNotifier {
     }
   }
 
-  void _activatePickedUniversity(University university) {
+  Future<void> _activatePickedUniversity(University university) async {
     universityPicked = university;
     isUniversityPicked = true;
+    await fetchSupportedCoursePrefices(university.id);
     notifyListeners();
   }
 
@@ -78,7 +84,14 @@ class SearchBarProvider extends ChangeNotifier {
   }
 
   Future<void> fetchSupportedCoursePrefices(String? universityPicked) async {
-    getSupportedPrefices(universityPicked ?? '');
+    final Result<List<CoursePrefix>, Exception> result = await getSupportedPrefices(universityPicked ?? '');
+    result.when(success: (List<CoursePrefix> coursePrefices) {
+      coursePrefixState = CoursePrefixState.loaded(
+        coursePrefices..insert(0, const CoursePrefix(id: 'all', prefix: 'Tümü')),
+      );
+    }, error: (Exception e) {
+      coursePrefixState = CoursePrefixState.error(e.toString());
+    });
   }
 }
 

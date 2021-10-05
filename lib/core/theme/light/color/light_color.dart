@@ -30,7 +30,12 @@ class LightColors implements IColors {
     bottomNavBarBackGround = Colors.white;
     bottomNavBarSelected = const Color(0xFF4a4a4a);
     bottomNavBarUnSelected = const Color(0xFFdbdbdb);
-    colorScheme = const ColorScheme.light().copyWith(onPrimary: Colors.black12, onSecondary: colors.white, onSurface: colors.mediumGreyBold);
+    colorScheme = const ColorScheme.light().copyWith(
+      onPrimary: Colors.black12,
+      onSecondary: colors.white,
+      secondaryVariant: const Color(0xFF01a7ef),
+      onSurface: colors.mediumGreyBold,
+    );
     brightness = Brightness.light;
   }
 
