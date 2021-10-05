@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 
 class SearchBarProvider extends ChangeNotifier {
+  final GetSupportedPrefices getSupportedPrefices;
   bool isUniversityPicked = false;
   late final University universityPicked;
-  SearchBarProvider() {
+  SearchBarProvider({required this.getSupportedPrefices}) {
     doHavePickedUniversity();
   }
 
@@ -73,6 +75,10 @@ class SearchBarProvider extends ChangeNotifier {
     _activatePickedUniversity(university);
     FocusScope.of(context).unfocus();
     // _activatePickedUniversity(university);
+  }
+
+  Future<void> fetchSupportedCoursePrefices(String? universityPicked) async {
+    getSupportedPrefices(universityPicked ?? '');
   }
 }
 

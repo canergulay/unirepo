@@ -41,8 +41,6 @@ class UniversityAdapter extends TypeAdapter<University> {
 }
 
 University _$UniversityFromJson(String documentID, Map<String, dynamic> json) {
-  print(documentID);
-  print(json);
   return University(
     id: documentID,
     name: json['name'] as String?,

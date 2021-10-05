@@ -1,18 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/university.dart';
 import 'package:unirepo/features/home/domain/usecases/cache_retrieve_universities.dart';
-import 'package:unirepo/features/home/domain/usecases/get_all_universities.dart';
+import 'package:unirepo/features/home/domain/usecases/get_universities.dart';
+import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
 part 'search_mobx.g.dart';
 
 class SearchMobx = _SearchMobx with _$SearchMobx;
 
 abstract class _SearchMobx with Store {
-  final GetAllUniversities _getAllUniversities = injector.get<GetAllUniversities>();
+  final GetUniversities _getUniversities = injector.get<GetUniversities>();
   final CacheRetrieveUniversities _cacheRetrieveUniversities = injector.get<CacheRetrieveUniversities>();
   bool _isCachedDataControlled = false;
 
@@ -50,7 +53,7 @@ abstract class _SearchMobx with Store {
 
   Future<void> _fetcDatas() async {
     print('datas will be fetched');
-    Result<List<University>, Exception> queryResult = await _getAllUniversities();
+    Result<List<University>, Exception> queryResult = await _getUniversities.getAllUniversities();
     queryResult.when(
         success: (List<University> universitiesFetched) {
           _setUniversities(universitiesFetched);
@@ -115,8 +118,6 @@ abstract class _SearchMobx with Store {
   bool? checkIfContainsQuery(University university, String query) {
     return university.name!.contains(query.trim()) || university.name!.contains(queryIconverter(query).trim());
   }
-
-  Future<void> fetchSupportedCoursePrefices() async {}
 }
 
 String queryIconverter(String query) {

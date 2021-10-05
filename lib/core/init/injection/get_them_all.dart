@@ -4,7 +4,8 @@ import 'package:unirepo/features/home/data/datasources/get_schools_datasource.da
 import 'package:unirepo/features/home/data/repositories/cached_university_repositary_impl.dart';
 import 'package:unirepo/features/home/data/repositories/get_all_universities_repositary_impl.dart';
 import 'package:unirepo/features/home/domain/usecases/cache_retrieve_universities.dart';
-import 'package:unirepo/features/home/domain/usecases/get_all_universities.dart';
+import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
+import 'package:unirepo/features/home/domain/usecases/get_universities.dart';
 
 final injector = GetIt.instance;
 
@@ -14,8 +15,9 @@ void setUp() {
 }
 
 void _setupGetAllUniversitiesModule() {
-  injector.registerLazySingleton<GetAllUniversities>(() => GetAllUniversities(getAllUniversitiesRepositary: injector()));
-  injector.registerLazySingleton<GetAllUniversitiesRepositary>(() => GetAllUniversitiesRepositary(readUnivercities: injector()));
+  injector.registerLazySingleton<GetSupportedPrefices>(() => GetSupportedPrefices(getAllUniversitiesRepositary: injector()));
+  injector.registerLazySingleton<GetUniversities>(() => GetUniversities(getAllUniversitiesRepositary: injector()));
+  injector.registerLazySingleton<GetUniversitiesRepositary>(() => GetUniversitiesRepositary(readUniversities: injector()));
   injector.registerLazySingleton<ReadUniversities>(() => ReadUniversities());
 }
 

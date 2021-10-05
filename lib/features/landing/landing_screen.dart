@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unirepo/core/init/injection/get_them_all.dart';
+import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 import 'package:unirepo/features/home/presentation/pages/home_screen.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 import 'package:unirepo/features/landing/screens.dart';
@@ -13,7 +15,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SearchBarProvider>(create: (_) => SearchBarProvider()),
+        ChangeNotifierProvider<SearchBarProvider>(create: (_) => SearchBarProvider(getSupportedPrefices: injector.get<GetSupportedPrefices>())),
         ChangeNotifierProvider<BottomNavigationProvider>(create: (_) => BottomNavigationProvider())
       ],
       child: Consumer<BottomNavigationProvider>(builder: (context, provider, w) {

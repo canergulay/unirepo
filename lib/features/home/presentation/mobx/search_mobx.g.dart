@@ -9,6 +9,21 @@ part of 'search_mobx.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SearchMobx on _SearchMobx, Store {
+  final _$coursePreficesAtom = Atom(name: '_SearchMobx.coursePrefices');
+
+  @override
+  List<String> get coursePrefices {
+    _$coursePreficesAtom.reportRead();
+    return super.coursePrefices;
+  }
+
+  @override
+  set coursePrefices(List<String> value) {
+    _$coursePreficesAtom.reportWrite(value, super.coursePrefices, () {
+      super.coursePrefices = value;
+    });
+  }
+
   final _$_universitiesAtom = Atom(name: '_SearchMobx._universities');
 
   @override
@@ -35,7 +50,7 @@ mixin _$SearchMobx on _SearchMobx, Store {
   @override
   String toString() {
     return '''
-
+coursePrefices: ${coursePrefices}
     ''';
   }
 }

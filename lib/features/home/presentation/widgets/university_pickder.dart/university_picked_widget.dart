@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
 class UniversityPicked extends StatelessWidget {
@@ -29,7 +30,11 @@ class UniversityPicked extends StatelessWidget {
           vertical: context.limitedheightUnit * 2,
           horizontal: context.limitedwidthUnit * 5,
         ),
-        child: universityText(provider, context));
+        child: GestureDetector(
+            onTap: () {
+              context.read<SearchBarProvider>().fetchSupportedCoursePrefices(provider.universityPicked.id);
+            },
+            child: universityText(provider, context)));
   }
 
   AutoSizeText universityText(SearchBarProvider provider, BuildContext context) {
