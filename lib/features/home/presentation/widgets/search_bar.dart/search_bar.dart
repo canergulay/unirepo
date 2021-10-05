@@ -25,25 +25,14 @@ class SearchBar extends StatelessWidget {
           ),
           Expanded(
               flex: 15,
-              child: Consumer<SearchBarProvider>(builder: (context, provider, __) {
-                return Column(
-                  children: [
-                    Expanded(child: searchBarChildGetter(context, provider)),
-                  ],
-                );
-              })),
+              child: Column(
+                children: [
+                  Expanded(child: buildFloatingSearchBar(context)),
+                ],
+              )),
         ],
       );
     });
-  }
-
-  Widget searchBarChildGetter(BuildContext context, SearchBarProvider provider) {
-    if (!provider.isUniversityPicked) {
-      print('yeah');
-      return buildFloatingSearchBar(context);
-    } else {
-      return Text(provider.universityPicked.name ?? '');
-    }
   }
 
   AnimatorButton optionButton(BuildContext context, {required SearchBarState myIndex, required double padding, required String text}) {

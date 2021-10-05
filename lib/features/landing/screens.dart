@@ -4,6 +4,6 @@ import 'package:unirepo/features/user/presentation/pages/user_screen.dart';
 
 class AppScreens {
   static List<Widget> screens() {
-    return [HomeScreen(), UserScreen()];
+    return const [HomeScreen(), UserScreen()];
   }
 }
