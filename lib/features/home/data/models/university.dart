@@ -9,16 +9,16 @@ class University extends HiveObject implements MapConverter {
   @HiveField(0)
   final String? name;
   @HiveField(1)
-  final int? id;
+  final String? id;
   University({this.id, this.name});
 
-  factory University.fromJson(Map<String, dynamic> json) => _$UniversityFromJson(json);
+  factory University.fromJson(String documentID, Map<String, dynamic> json) => _$UniversityFromJson(documentID, json);
   @override
   Map<String, dynamic> toJson() => _$UniversityToJson(this);
 
   @override
-  University fromJson(Map<String, dynamic>? json) {
+  University fromJson(String documentID, Map<String, dynamic>? json) {
     // TODO: implement fromJson
-    return University.fromJson(json ?? {});
+    return University.fromJson(documentID, json ?? {});
   }
 }

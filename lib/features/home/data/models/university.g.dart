@@ -17,7 +17,7 @@ class UniversityAdapter extends TypeAdapter<University> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return University(
-      id: fields[1] as int?,
+      id: fields[1] as String?,
       name: fields[0] as String?,
     );
   }
@@ -40,18 +40,15 @@ class UniversityAdapter extends TypeAdapter<University> {
       identical(this, other) || other is UniversityAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-University _$UniversityFromJson(Map<String, dynamic> json) => University(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-    );
+University _$UniversityFromJson(String documentID, Map<String, dynamic> json) {
+  print(documentID);
+  print(json);
+  return University(
+    id: documentID,
+    name: json['name'] as String?,
+  );
+}
 
 Map<String, dynamic> _$UniversityToJson(University instance) => <String, dynamic>{
       'name': instance.name,
-      'id': instance.id,
     };

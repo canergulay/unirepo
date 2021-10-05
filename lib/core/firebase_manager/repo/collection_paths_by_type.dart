@@ -7,6 +7,6 @@ class FirebaseCollectionPaths {
   }
 
   static Map<dynamic, String> paths = {
-    University: 'university',
+    University: 'univercities',
   };
 }

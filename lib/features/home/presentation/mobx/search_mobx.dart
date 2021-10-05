@@ -19,6 +19,9 @@ abstract class _SearchMobx with Store {
   late final _universitiesStored;
 
   @observable
+  List<String> coursePrefices = [];
+
+  @observable
   List<University> _universities = [];
 
   List<University> get universities => _universities;
@@ -46,6 +49,7 @@ abstract class _SearchMobx with Store {
   }
 
   Future<void> _fetcDatas() async {
+    print('datas will be fetched');
     Result<List<University>, Exception> queryResult = await _getAllUniversities();
     queryResult.when(
         success: (List<University> universitiesFetched) {
@@ -58,11 +62,15 @@ abstract class _SearchMobx with Store {
   void _ifCached() async {
     _isCachedDataControlled = true;
     final Result<List<University>, Exception> _cachedUniversities = await _cacheRetrieveUniversities.getCachedUniversities();
-    _cachedUniversities.when(
-        success: (List<University> universitiesCached) {
-          _setUniversities(universitiesCached);
-        },
-        error: (Exception e) {});
+    _cachedUniversities.when(success: (List<University> universitiesCached) {
+      if (universitiesCached.isNotEmpty) {
+        _setUniversities(universitiesCached);
+      } else {
+        _fetcDatas();
+      }
+    }, error: (Exception e) {
+      _fetcDatas();
+    });
   }
 
   void _cacheFetchedUniversities(List<University> universities) async {

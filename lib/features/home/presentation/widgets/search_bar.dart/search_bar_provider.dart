@@ -50,7 +50,7 @@ class SearchBarProvider extends ChangeNotifier {
     if (universityCachedName == null) {
       // MEANING THAT THERE IS NOT A UNIVERSITY THAT IS CACHED AS A PICKED UNIVERSITY
     } else {
-      final int? universityCachedId = await HiveManager.instance.get(
+      final String? universityCachedId = await HiveManager.instance.get(
         boxName: AppConstants.shared.hivePickedUniversityBox,
         key: AppConstants.shared.hivePickedUniversityidKey,
       );
