@@ -115,6 +115,8 @@ abstract class _SearchMobx with Store {
   bool? checkIfContainsQuery(University university, String query) {
     return university.name!.contains(query.trim()) || university.name!.contains(queryIconverter(query).trim());
   }
+
+  Future<void> fetchSupportedCoursePrefices() async {}
 }
 
 String queryIconverter(String query) {

@@ -11,8 +11,7 @@ class GetAllUniversitiesRepositary implements GetAllUniversitiesRepositaryContra
   Future<Result<List<University>, Exception>> getAllUniversities() async {
     try {
       final List<University> docResult = await readUnivercities.getDocuments(
-        responseType: readUnivercities.responseType,
-        collectionName: readUnivercities.collectionName,
+        responseType: University(),
         orderByField: 'id',
       );
       return Result.success(docResult);

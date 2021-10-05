@@ -5,8 +5,7 @@ import 'package:unirepo/core/firebase_manager/repo/collection_paths_by_type.dart
 import 'package:unirepo/core/firebase_manager/repo/collectiong_getters.dart';
 
 mixin GetDocumentsMixin<T extends MapConverter> {
-  Future<List<T>> getDocuments(
-      {required T responseType, required String collectionName, required Object orderByField, bool descending = false}) async {
+  Future<List<T>> getDocuments({required T responseType, required Object orderByField, bool descending = false}) async {
     final response = await FirebaseFirestore.instance
         .collection(FirebaseCollectionPaths.getCollectionName<T>())
         .orderBy(OrderByController.shared.getOrder<T>().field)
