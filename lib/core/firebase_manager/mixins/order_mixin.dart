@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unirepo/core/firebase_manager/models/order_model.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 
 class OrderByController {
   static var shared = OrderByController();

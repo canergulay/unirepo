@@ -6,7 +6,7 @@ import 'package:unirepo/core/local_manager/hive_manager.dart';
 
 import 'core/init/injection/get_them_all.dart' as getItStarter;
 import 'core/theme/app_theme.dart';
-import 'features/home/data/models/university.dart';
+import 'features/home/data/models/university/university.dart';
 import 'features/landing/landing_screen.dart';
 
 void main() async {

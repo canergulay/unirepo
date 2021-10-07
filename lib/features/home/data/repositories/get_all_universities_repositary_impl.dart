@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unirepo/features/home/data/datasources/get_schools_datasource.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
 import 'package:unirepo/core/freezed/result.dart';
-import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/domain/repositories/get_all_schools_repositary.dart';
 
 class GetUniversitiesRepositary implements GetAllUniversitiesRepositaryContract {
@@ -14,7 +12,6 @@ class GetUniversitiesRepositary implements GetAllUniversitiesRepositaryContract 
     try {
       final List<University> docResult = await readUniversities.getDocuments(
         responseType: University(),
-        orderByField: 'id',
       );
       return Result.success(docResult);
     } catch (e) {

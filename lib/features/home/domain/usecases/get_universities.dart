@@ -1,5 +1,5 @@
 import 'package:unirepo/core/freezed/result.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/data/repositories/get_all_universities_repositary_impl.dart';
 
 class GetUniversities {

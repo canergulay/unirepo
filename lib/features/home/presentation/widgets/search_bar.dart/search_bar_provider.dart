@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/core/freezed/fetch_state.dart';
 import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix_result.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
+import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 
 class SearchBarProvider extends ChangeNotifier {
   CoursePrefixState coursePrefixState = const CoursePrefixState.loading();
+  FetchState<List<Note>, Exception> noteState = const FetchState.loading();
 
   final GetSupportedPrefices getSupportedPrefices;
+  final GetNotes getNotes;
   bool isUniversityPicked = false;
   late final University universityPicked;
-  SearchBarProvider({required this.getSupportedPrefices}) {
+  SearchBarProvider({
+    required this.getSupportedPrefices,
+    required this.getNotes,
+  }) {
     doHavePickedUniversity();
   }
 
@@ -72,7 +80,8 @@ class SearchBarProvider extends ChangeNotifier {
   Future<void> _activatePickedUniversity(University university) async {
     universityPicked = university;
     isUniversityPicked = true;
-    await fetchSupportedCoursePrefices(university.id);
+    await _fetchSupportedCoursePrefices(university.id);
+    await _getInitialNotes(university.id);
     notifyListeners();
   }
 
@@ -83,7 +92,7 @@ class SearchBarProvider extends ChangeNotifier {
     // _activatePickedUniversity(university);
   }
 
-  Future<void> fetchSupportedCoursePrefices(String? universityPicked) async {
+  Future<void> _fetchSupportedCoursePrefices(String? universityPicked) async {
     final Result<List<CoursePrefix>, Exception> result = await getSupportedPrefices(universityPicked ?? '');
     result.when(success: (List<CoursePrefix> coursePrefices) {
       coursePrefixState = CoursePrefixState.loaded(
@@ -91,6 +100,15 @@ class SearchBarProvider extends ChangeNotifier {
       );
     }, error: (Exception e) {
       coursePrefixState = CoursePrefixState.error(e.toString());
+    });
+  }
+
+  Future<void> _getInitialNotes(String? universityPicked) async {
+    final Result<List<Note>, Exception> result = await getNotes(universityID: universityPicked ?? '');
+    result.when(success: (List<Note> notes) {
+      noteState = FetchState.loaded(notes);
+    }, error: (Exception e) {
+      noteState = FetchState.error(e);
     });
   }
 }

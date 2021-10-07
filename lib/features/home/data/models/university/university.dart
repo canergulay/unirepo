@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:unirepo/core/components/models/map_converter.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'university.g.dart';
 

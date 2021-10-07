@@ -5,23 +5,13 @@ import 'package:unirepo/core/firebase_manager/repo/collection_paths_by_type.dart
 import 'package:unirepo/core/firebase_manager/repo/collectiong_getters.dart';
 
 mixin GetDocumentsMixin<T extends MapConverter> {
-  Future<List<T>> getDocuments({required T responseType, bool descending = false}) async {
+  Future<List<T>> getDocuments({required T responseType, required Object orderByField, bool descending = false}) async {
     final response = await FirebaseFirestore.instance
         .collection(FirebaseCollectionPaths.getCollectionName<T>())
         .orderBy(OrderByController.shared.getOrder<T>().field)
         .get();
-    return (response.docs.map((e) => responseType.fromJson(e.id, e.data()) as T).toList());
-  }
-
-  Future<QuerySnapshot<Map<String, dynamic>>> getRawDocuments(
-      {required T responseType, required String whereField, required Object isEqualTo, bool descending = false}) async {
-    final response = await FirebaseFirestore.instance
-        .collection(FirebaseCollectionPaths.getCollectionName<T>())
-        .where(
-          whereField,
-          isEqualTo: isEqualTo,
-        )
-        .get();
-    return response;
+    return (response.docs.map((e) {
+      return responseType.fromJson(e.id, e.data()) as T;
+    }).toList());
   }
 }

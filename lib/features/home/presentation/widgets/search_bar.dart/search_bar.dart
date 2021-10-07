@@ -6,7 +6,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/buttons/animator_button.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 

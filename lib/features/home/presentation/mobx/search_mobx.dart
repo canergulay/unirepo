@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/domain/usecases/cache_retrieve_universities.dart';
+import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_universities.dart';
-import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
 part 'search_mobx.g.dart';
 
@@ -17,6 +15,7 @@ class SearchMobx = _SearchMobx with _$SearchMobx;
 abstract class _SearchMobx with Store {
   final GetUniversities _getUniversities = injector.get<GetUniversities>();
   final CacheRetrieveUniversities _cacheRetrieveUniversities = injector.get<CacheRetrieveUniversities>();
+  final GetNotes _getNotes = injector.get<GetNotes>();
   bool _isCachedDataControlled = false;
 
   late final _universitiesStored;

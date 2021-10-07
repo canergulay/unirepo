@@ -5,6 +5,7 @@ import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dar
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
+import 'package:unirepo/features/home/data/models/note/note.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
@@ -20,7 +21,11 @@ class UniversityPicked extends StatelessWidget {
     final SearchBarProvider provider = context.read<SearchBarProvider>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [pickedUniversityContainer(context, provider), getCoursePrefices(provider, context)],
+      children: [
+        pickedUniversityContainer(context, provider),
+        getCoursePrefices(provider, context),
+        getNotes(provider, context),
+      ],
     );
   }
 
@@ -33,11 +38,7 @@ class UniversityPicked extends StatelessWidget {
           vertical: context.limitedheightUnit * 2,
           horizontal: context.limitedwidthUnit * 5,
         ),
-        child: GestureDetector(
-            onTap: () {
-              context.read<SearchBarProvider>().fetchSupportedCoursePrefices(provider.universityPicked.id);
-            },
-            child: universityText(provider, context)));
+        child: universityText(provider, context));
   }
 
   AutoSizeText universityText(SearchBarProvider provider, BuildContext context) {
@@ -53,6 +54,21 @@ class UniversityPicked extends StatelessWidget {
     }, loaded: (List<CoursePrefix> coursePrefices) {
       return Container(height: context.limitedheightUnit * 10, child: CoursePrefixListView(coursePrefices));
     }, error: (String? message) {
+      return const Text('error');
+    });
+  }
+
+  Widget getNotes(SearchBarProvider provider, BuildContext context) {
+    return provider.noteState.when(loading: () {
+      return const CircularProgressIndicator();
+    }, loaded: (List<Note> notes) {
+      return ListView.builder(
+          shrinkWrap: true,
+          itemCount: notes.length,
+          itemBuilder: (context, index) {
+            return Text(notes[index].coursePrefix?.prefix ?? '');
+          });
+    }, error: (Exception e) {
       return const Text('error');
     });
   }

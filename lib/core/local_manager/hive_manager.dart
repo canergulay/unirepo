@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 
 class HiveManager {
   static HiveManager _instace = HiveManager._init();

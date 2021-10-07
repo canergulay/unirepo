@@ -64,37 +64,13 @@ FontWeight fontWeightGetter(int index) {
 }
 
 BoxDecoration boxDecorationGetter(int myIndex, int _selectedState, BuildContext context) {
-  if (myIndex == _selectedState - 1) {
-    return _leftBoxDecoration(context);
-  } else if (myIndex == _selectedState) {
+  if (myIndex == _selectedState) {
     return _selectedBoxDecoration(context);
-  } else if (myIndex == _selectedState + 1) {
-    return _rightBoxDecoration(context);
   }
-  return simpleShadowDecoration(context);
-}
 
-BoxDecoration _leftBoxDecoration(BuildContext context) {
-  return simpleShadowDecoration(context).copyWith(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(12),
-      bottomLeft: Radius.circular(12),
-    ),
-  );
+  return BoxDecoration(color: Theme.of(context).colorScheme.onSecondary);
 }
 
 BoxDecoration _selectedBoxDecoration(BuildContext context) {
-  return simpleShadowDecoration(context).copyWith(
-    borderRadius: BorderRadius.circular(0),
-    color: Theme.of(context).colorScheme.secondaryVariant,
-  );
-}
-
-BoxDecoration _rightBoxDecoration(BuildContext context) {
-  return simpleShadowDecoration(context).copyWith(
-    borderRadius: const BorderRadius.only(
-      topRight: Radius.circular(12),
-      bottomRight: Radius.circular(12),
-    ),
-  );
+  return BoxDecoration(color: Theme.of(context).colorScheme.secondaryVariant);
 }

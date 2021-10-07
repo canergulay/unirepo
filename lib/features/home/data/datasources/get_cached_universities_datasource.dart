@@ -1,6 +1,6 @@
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
-import 'package:unirepo/features/home/data/models/university.dart';
+import 'package:unirepo/features/home/data/models/university/university.dart';
 
 class GetCachedUniversitiesLocalDataSource {
   Future<List<University>> getCachedUniversities() async {
