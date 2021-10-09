@@ -8,7 +8,7 @@ Widget mainTextfield(
   required String hint,
   TextInputAction textInputAction = TextInputAction.next,
   bool obscure = false,
-  required String Function(String?) validator,
+  required String? Function(String?) validator,
 }) {
   //Just a simple textfield we can use in both login and register
   // Can be modified depending on the upcoming UI drawns

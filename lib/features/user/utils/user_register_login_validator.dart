@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 
 class RegisterLoginValidator {
-  static String validateUserName(String? username) {
+  static String? validateUserName(String? username) {
     if (username != null) {
       if (username.length < 4) {
         return "Kullanıcı adınız çok kısa!";
@@ -11,10 +11,9 @@ class RegisterLoginValidator {
     } else {
       return "Kullanıcı adınızı giriniz!";
     }
-    return '';
   }
 
-  static String validateEmail(String? email) {
+  static String? validateEmail(String? email) {
     if (email != null) {
       if (EmailValidator.validate(email)) {
         if (!(email.endsWith('edu.tr') || email.endsWith('edu.net'))) {
@@ -24,10 +23,9 @@ class RegisterLoginValidator {
         return "Email adresinizi giriniz!";
       }
     }
-    return '';
   }
 
-  static String validatePassword(String? password) {
+  static String? validatePassword(String? password) {
     if (password != null) {
       if (password.length < 4) {
         return "Parolanız çok kısa";
@@ -37,6 +35,5 @@ class RegisterLoginValidator {
     } else {
       return "Parolanızı giriniz!";
     }
-    return '';
   }
 }

@@ -3,7 +3,7 @@ import 'package:unirepo/core/components/widgets/main_textfield.dart';
 
 class MainPasswordTextfield extends StatefulWidget {
   final String passwordHint;
-  final String Function(String?) validator;
+  final String? Function(String?) validator;
   const MainPasswordTextfield({Key? key, required this.passwordHint, required this.validator}) : super(key: key);
 
   @override
@@ -21,6 +21,7 @@ class _MainPasswordTextfieldState extends State<MainPasswordTextfield> {
           hint: widget.passwordHint,
           obscure: _obscure,
           validator: widget.validator,
+          textInputAction: TextInputAction.done,
         ),
         eyeButton(),
       ],

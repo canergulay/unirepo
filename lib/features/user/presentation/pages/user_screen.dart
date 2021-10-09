@@ -26,7 +26,7 @@ class _UserScreenState extends State<UserScreen> {
             const Spacer(flex: 20),
             Image.asset(AssetPaths.instance.login, scale: 3),
             registerInfoTitle(context),
-            const RegistrationForm(),
+            RegistrationForm(),
             const Spacer(flex: 12),
           ],
         ),

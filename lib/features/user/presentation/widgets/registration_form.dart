@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unirepo/core/auth/register/register_provider.dart';
 import 'package:unirepo/core/components/buttons/clasic_elevated_button.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/components/widgets/main_textfield.dart';
@@ -7,20 +9,14 @@ import 'package:unirepo/core/constants/asset_paths.dart';
 import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/features/user/utils/user_register_login_validator.dart';
 
-class RegistrationForm extends StatefulWidget {
-  const RegistrationForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<RegistrationForm> createState() => _RegistrationFormState();
-}
-
-class _RegistrationFormState extends State<RegistrationForm> {
-  final _formKey = GlobalKey<FormState>();
+class RegistrationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Form(key: _formKey, child: formBody(context));
+    return Form(
+      key: context.read<RegisterProvider>().formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: formBody(context),
+    );
   }
 
   Padding formBody(BuildContext context) {
@@ -43,7 +39,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
     return classicElevatedButton(
       context,
       onPressed: () {
-        _formKey.currentState?.validate();
+        context.read<RegisterProvider>().formKey.currentState?.validate();
       },
       title: SentenceRepositary.shared.registerRegister,
     );
