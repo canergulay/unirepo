@@ -16,19 +16,23 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(flex: 2),
-          Image.asset(
-            AssetPaths.instance.login,
-            scale: 3,
-          ),
-          registerInfoTitle(context),
-          const RegistrationForm(),
-          const Spacer(flex: 12),
-        ],
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      child: SizedBox(
+        height: context.dynamicHeight * 1,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(flex: 20),
+            Image.asset(
+              AssetPaths.instance.login,
+              scale: 3,
+            ),
+            registerInfoTitle(context),
+            const RegistrationForm(),
+            const Spacer(flex: 12),
+          ],
+        ),
       ),
     );
   }

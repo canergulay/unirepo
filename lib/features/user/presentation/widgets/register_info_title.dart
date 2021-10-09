@@ -7,7 +7,7 @@ Padding registerInfoTitle(BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(
       horizontal: context.limitedwidthUnit * 2,
-      vertical: context.limitedheightUnit * 1,
+      vertical: context.limitedheightUnit * 3,
     ),
     child: Text(
       SentenceRepositary.shared.shouldHaveAnAccount,

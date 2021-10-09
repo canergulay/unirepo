@@ -6,4 +6,5 @@ class SentenceRepositary {
   final String registerUserName = 'Kullanıcı adınız, isim & soyisim vb';
   final String registerEmail = 'Üniversite e-posta adresiniz';
   final String registerPassword = 'Şifreniz';
+  final String registerRegister = 'Kayıt ol';
 }
