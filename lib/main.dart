@@ -23,6 +23,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeManager.create(AppThemeLight()), title: 'Material App', home: const LandingScreen());
+    return MaterialApp(
+      theme: ThemeManager.create(AppThemeLight()),
+      title: 'Material App',
+      home: const LandingScreen(),
+    );
   }
 }

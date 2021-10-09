@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unirepo/core/auth/manager/authentication_provider.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
@@ -21,7 +22,12 @@ class LandingScreen extends StatelessWidget {
                   getSupportedPrefices: injector.get<GetSupportedPrefices>(),
                   getNotes: injector.get<GetNotes>(),
                 )),
-        ChangeNotifierProvider<BottomNavigationProvider>(create: (_) => BottomNavigationProvider())
+        ChangeNotifierProvider<BottomNavigationProvider>(
+          create: (_) => BottomNavigationProvider(),
+        ),
+        ChangeNotifierProvider<AuthenticationProvider>(
+          create: (_) => AuthenticationProvider(),
+        )
       ],
       child: Consumer<BottomNavigationProvider>(builder: (context, provider, w) {
         return Scaffold(

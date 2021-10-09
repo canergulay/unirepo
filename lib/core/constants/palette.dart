@@ -7,4 +7,5 @@ class Palette {
 
   final Color appBarBlue = const Color(0xFF25c5f9);
   final int documentShownSize = 6;
+  final double borderRadiusGeneral = 12;
 }
