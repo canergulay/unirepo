@@ -31,9 +31,11 @@ class LandingScreen extends StatelessWidget {
       ],
       child: Consumer<BottomNavigationProvider>(builder: (context, provider, w) {
         return Scaffold(
-          bottomNavigationBar: CustomBottomNavigationBar(),
-          body: AppScreens.screens()[provider.bottomNavigationState],
-        );
+            bottomNavigationBar: CustomBottomNavigationBar(),
+            body: IndexedStack(
+              children: AppScreens.screens(),
+              index: provider.bottomNavigationState,
+            ));
       }),
     );
   }

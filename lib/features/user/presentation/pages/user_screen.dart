@@ -24,10 +24,7 @@ class _UserScreenState extends State<UserScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(flex: 20),
-            Image.asset(
-              AssetPaths.instance.login,
-              scale: 3,
-            ),
+            Image.asset(AssetPaths.instance.login, scale: 3),
             registerInfoTitle(context),
             const RegistrationForm(),
             const Spacer(flex: 12),
