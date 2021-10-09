@@ -7,7 +7,8 @@ class RegisterWithEmailPasswordFirebaseDS {
       email: registrationEntity.mail,
       password: registrationEntity.password,
     );
-    print(userCredential);
+
+    final tokenn = await userCredential.user?.getIdToken();
     return true;
   }
 }

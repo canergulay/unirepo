@@ -6,6 +6,7 @@ import 'package:unirepo/core/constants/palette.dart';
 Widget mainTextfield(
   BuildContext context, {
   required String hint,
+  required TextEditingController controller,
   TextInputAction textInputAction = TextInputAction.next,
   bool obscure = false,
   required String? Function(String?) validator,
@@ -16,6 +17,7 @@ Widget mainTextfield(
     style: Theme.of(context).textTheme.bodyText1,
     obscureText: obscure,
     validator: validator,
+    controller: controller,
     textInputAction: textInputAction,
     decoration: basicBlankInputDecoration(context, hint: hint),
   );

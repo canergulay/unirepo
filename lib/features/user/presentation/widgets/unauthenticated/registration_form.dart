@@ -10,6 +10,8 @@ import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/features/user/utils/user_register_login_validator.dart';
 
 class RegistrationForm extends StatelessWidget {
+  RegistrationForm({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -38,9 +40,7 @@ class RegistrationForm extends StatelessWidget {
   ElevatedButton registerButton(BuildContext context) {
     return classicElevatedButton(
       context,
-      onPressed: () {
-        context.read<RegisterProvider>().formKey.currentState?.validate();
-      },
+      onPressed: context.read<RegisterProvider>().onRegisterButtonTap,
       title: SentenceRepositary.shared.registerRegister,
     );
   }
@@ -51,12 +51,14 @@ class RegistrationForm extends StatelessWidget {
         mainTextfield(
           context,
           hint: SentenceRepositary.shared.registerUserName,
+          controller: context.read<RegisterProvider>().userNameController,
           validator: RegisterLoginValidator.validateUserName,
         ),
         SizedBox(height: context.limitedheightUnit * 1.5),
         mainTextfield(
           context,
           hint: SentenceRepositary.shared.registerEmail,
+          controller: context.read<RegisterProvider>().mailController,
           validator: RegisterLoginValidator.validateEmail,
         ),
         SizedBox(height: context.limitedheightUnit * 1.5),

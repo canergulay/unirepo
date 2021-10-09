@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unirepo/core/auth/register/register_provider.dart';
 import 'package:unirepo/core/components/widgets/main_textfield.dart';
 
 class MainPasswordTextfield extends StatefulWidget {
@@ -20,6 +22,7 @@ class _MainPasswordTextfieldState extends State<MainPasswordTextfield> {
           context,
           hint: widget.passwordHint,
           obscure: _obscure,
+          controller: context.read<RegisterProvider>().passwordController,
           validator: widget.validator,
           textInputAction: TextInputAction.done,
         ),

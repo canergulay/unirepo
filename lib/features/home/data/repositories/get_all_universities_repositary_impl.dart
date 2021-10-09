@@ -1,6 +1,6 @@
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/home/data/datasources/get_schools_datasource.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
-import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/domain/repositories/get_all_schools_repositary.dart';
 

@@ -1,5 +1,5 @@
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/home/data/datasources/get_cached_universities_datasource.dart';
-import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/domain/repositories/get_cached_schools_repositary.dart';
 

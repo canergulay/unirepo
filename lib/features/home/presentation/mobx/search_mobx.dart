@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
-import 'package:unirepo/core/freezed/result.dart';
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';

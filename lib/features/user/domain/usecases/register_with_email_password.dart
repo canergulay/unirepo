@@ -1,4 +1,4 @@
-import 'package:unirepo/core/freezed/result.dart';
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/user/data/repositories/register_with_email_password_repositary.dart';
 import 'package:unirepo/features/user/domain/entities/registration_entity.dart';
 

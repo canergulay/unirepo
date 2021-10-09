@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
-import 'package:unirepo/core/freezed/fetch_state.dart';
-import 'package:unirepo/core/freezed/result.dart';
+import 'package:unirepo/core/freezed/fetch_state/fetch_state.dart';
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix_result.dart';

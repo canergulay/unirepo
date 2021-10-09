@@ -1,7 +1,7 @@
+import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/home/data/datasources/get_notes_data_source.dart';
 import 'package:unirepo/features/home/data/models/note/note.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';
-import 'package:unirepo/core/freezed/result.dart';
 import 'package:unirepo/features/home/domain/repositories/get_all_schools_repositary.dart';
 import 'package:unirepo/features/home/domain/repositories/get_notes_repositary.dart';
 
