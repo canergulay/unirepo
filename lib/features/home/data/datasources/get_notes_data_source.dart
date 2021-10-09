@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unirepo/core/constants/palette.dart';
 import 'package:unirepo/core/firebase_manager/mixins/get_documents_mixin.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
 import 'package:unirepo/features/home/data/models/note/note.dart';
@@ -34,16 +35,20 @@ Future<List<Note>> parseThem(QuerySnapshot<Map<String, dynamic>> rawDocuments) a
     final sharedBy = await (note.data()['shared_by'] as DocumentReference).get();
 
     final List<String?>? photos = [];
-    (data['documents'] as List<dynamic>).forEach((element) {
+    (data['documents'] as List<dynamic>).getRange(0, Palette.instance.documentShownSize).forEach((element) {
       photos?.add(element.toString());
     });
+
+    final DateTime date = (data['created'] as Timestamp).toDate();
+    print(date);
 
     final Note noteToAdd = Note(
         courseCode: data['course_code'],
         coursePrefix: CoursePrefix.fromJson((coursePrefix.data() as Map<String, dynamic>)),
         documents: photos,
+        created: date,
         explanation: data['explanation'],
-        numberOfNotes: photos?.length,
+        numberOfNotes: (data['documents'] as List<dynamic>).length,
         title: data['title'],
         user: User.fromJson((sharedBy.data() as Map<String, dynamic>)),
         universityId: (note.data()['university_id'] as DocumentReference).id);

@@ -7,7 +7,8 @@ part of 'note.dart';
 // **************************************************************************
 
 Note _$NoteFromJson(Map<String, dynamic> json) {
-  print(json['course_prefix']);
+  print(json['created']);
+  print('note burada');
   return Note(
     courseCode: json['courseCode'] as int?,
     // coursePrefix: json['course_prefix'] == null ? null : CoursePrefix.fromJson(json['coursePrefix'] as Map<String, dynamic>),

@@ -15,8 +15,18 @@ class Note implements MapConverter {
   final User? user;
   final String? title;
   final int? numberOfNotes;
+  final DateTime? created;
   final String? universityId;
-  Note({this.courseCode, this.numberOfNotes, this.coursePrefix, this.documents, this.explanation, this.title, this.universityId, this.user});
+  Note(
+      {this.courseCode,
+      this.numberOfNotes,
+      this.coursePrefix,
+      this.documents,
+      this.created,
+      this.explanation,
+      this.title,
+      this.universityId,
+      this.user});
 
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
   @override

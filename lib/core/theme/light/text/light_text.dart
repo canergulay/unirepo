@@ -37,8 +37,12 @@ class TextThemeLight implements ITextTheme {
   TextThemeLight(this.primaryColor) {
     data = TextTheme(
       headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-      subtitle1: TextStyle(fontSize: 16.0),
-    ).apply(bodyColor: Colors.black);
+      subtitle1: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFFfb8500),
+      ),
+    ).apply();
   }
 
   @override

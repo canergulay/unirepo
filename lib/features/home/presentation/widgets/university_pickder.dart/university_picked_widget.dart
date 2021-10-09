@@ -8,6 +8,7 @@ import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.da
 import 'package:unirepo/features/home/data/models/note/note.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
+import 'package:unirepo/features/home/presentation/widgets/university_pickder.dart/note_widget.dart';
 
 import 'course_prefix_list_view.dart';
 
@@ -52,7 +53,7 @@ class UniversityPicked extends StatelessWidget {
     return provider.coursePrefixState.when(loading: () {
       return const CircularProgressIndicator();
     }, loaded: (List<CoursePrefix> coursePrefices) {
-      return Container(height: context.limitedheightUnit * 10, child: CoursePrefixListView(coursePrefices));
+      return SizedBox(height: context.limitedheightUnit * 10, child: CoursePrefixListView(coursePrefices));
     }, error: (String? message) {
       return const Text('error');
     });
@@ -66,7 +67,7 @@ class UniversityPicked extends StatelessWidget {
           shrinkWrap: true,
           itemCount: notes.length,
           itemBuilder: (context, index) {
-            return Text(notes[index].coursePrefix?.prefix ?? '');
+            return noteContainer(notes[index], context);
           });
     }, error: (Exception e) {
       return const Text('error');

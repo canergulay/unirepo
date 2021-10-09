@@ -27,13 +27,16 @@ class LightColors implements IColors {
     tabBarColor = colors.green;
     tabbarNormalColor = colors.darkerGrey;
     tabbarSelectedColor = colors.green;
+
     bottomNavBarBackGround = Colors.white;
     bottomNavBarSelected = const Color(0xFF4a4a4a);
     bottomNavBarUnSelected = const Color(0xFFdbdbdb);
     colorScheme = const ColorScheme.light().copyWith(
+      primary: Colors.white,
       onPrimary: Colors.black12,
       onSecondary: colors.white,
       secondaryVariant: const Color(0xFF01a7ef),
+      primaryVariant: const Color(0xFF25c5fa),
       onSurface: colors.mediumGreyBold,
     );
     brightness = Brightness.light;
