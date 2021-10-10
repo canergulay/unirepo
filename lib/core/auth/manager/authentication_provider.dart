@@ -13,7 +13,7 @@ class AuthenticationProvider extends ChangeNotifier {
     _listenState();
   }
 
-  void _listenState() {
+  void _listenState() async {
     _firebaseAuth.authStateChanges().listen(userStatusChanged);
   }
 

@@ -6,8 +6,8 @@ import 'package:unirepo/core/constants/sentence_repositary.dart';
 Padding registerInfoTitle(BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(
-      horizontal: context.limitedwidthUnit * 2,
-      vertical: context.limitedheightUnit * 3,
+      horizontal: context.limitedwidthUnit * 4,
+      vertical: context.limitedheightUnit * 2,
     ),
     child: Text(
       SentenceRepositary.shared.shouldHaveAnAccount,

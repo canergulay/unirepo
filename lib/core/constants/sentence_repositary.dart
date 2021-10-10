@@ -7,4 +7,7 @@ class SentenceRepositary {
   final String registerEmail = 'Üniversite e-posta adresiniz';
   final String registerPassword = 'Şifreniz';
   final String registerRegister = 'Kayıt ol';
+  final String haveAlreadyAcc = 'Zaten bir hesabın var mı ?';
+  final String login = ' Giriş yap';
+  final String forgetpw = 'Şifreni mi unuttun ?';
 }
