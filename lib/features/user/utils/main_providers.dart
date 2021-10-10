@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unirepo/core/auth/login/login_provider.dart';
 import 'package:unirepo/core/auth/manager/authentication_provider.dart';
 import 'package:unirepo/core/auth/register/register_provider.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
@@ -23,10 +24,11 @@ class MainProviders {
             create: (_) => AuthenticationProvider(),
           ),
           Provider(
-            create: (context) => RegisterProvider(
+            create: (context) => RegisterManager(
               authenticationProvider: context.read<AuthenticationProvider>(),
             ),
           ),
+          Provider(create: (context) => LoginManager()),
         ],
         child: child,
       );

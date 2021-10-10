@@ -5,10 +5,10 @@ import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/features/user/domain/entities/registration_entity.dart';
 import 'package:unirepo/features/user/domain/usecases/register_with_email_password.dart';
 
-class RegisterProvider {
+class RegisterManager {
   final AuthenticationProvider authenticationProvider;
   final RegisterWithEmailPassword registerWithEmailPassword = injector.get<RegisterWithEmailPassword>();
-  RegisterProvider({required this.authenticationProvider});
+  RegisterManager({required this.authenticationProvider});
 
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController mailController = TextEditingController();

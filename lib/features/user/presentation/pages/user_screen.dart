@@ -22,13 +22,7 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      child: SizedBox(
-        height: context.dynamicHeight * 1,
-        child: getAuthenticatedWidget(context),
-      ),
-    );
+    return getAuthenticatedWidget(context);
   }
 
   Widget getAuthenticatedWidget(BuildContext context) {
