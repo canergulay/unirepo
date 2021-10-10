@@ -28,19 +28,13 @@ class RegistrationForm extends StatelessWidget {
   Padding registerForm(BuildContext context) {
     return formBody(
       context,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            textFieldsColumn(context),
-            SizedBox(height: context.limitedheightUnit * 2),
-            forgetPasswordButton(context),
-            SizedBox(height: context.limitedheightUnit * 1),
-            registerButton(context),
-            SizedBox(height: context.limitedheightUnit * 2),
-            registerInfoSpan(context)
-          ],
-        ),
-      ),
+      children: [
+        textFieldsColumn(context),
+        SizedBox(height: context.limitedheightUnit * 2),
+        registerButton(context),
+        SizedBox(height: context.limitedheightUnit * 2),
+        registerInfoSpan(context)
+      ],
     );
   }
 
@@ -70,21 +64,6 @@ class RegistrationForm extends StatelessWidget {
     );
   }
 
-  Row forgetPasswordButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        basicTextInkWell(
-          context,
-          text: SentenceRepositary.shared.forgetpw,
-          onTap: () {
-            //TODO : OPEN DIALOG --> FORGET PASSWORD
-          },
-        ),
-      ],
-    );
-  }
-
   ElevatedButton registerButton(BuildContext context) {
     return classicElevatedButton(
       context,
@@ -101,7 +80,7 @@ class RegistrationForm extends StatelessWidget {
       onPressed: () {
         context.read<PageController>().nextPage(
               duration: const Duration(milliseconds: 550),
-              curve: Curves.elasticIn,
+              curve: Curves.easeInExpo,
             );
       },
     );

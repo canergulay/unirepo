@@ -10,4 +10,5 @@ class SentenceRepositary {
   final String haveAlreadyAcc = 'Zaten bir hesabın var mı ?';
   final String login = ' Giriş yap';
   final String forgetpw = 'Şifreni mi unuttun ?';
+  final String dontHaveAcc = "Henüz hesap oluşturmadın mı ? ";
 }

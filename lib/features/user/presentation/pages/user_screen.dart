@@ -22,7 +22,12 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
-    return getAuthenticatedWidget(context);
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: context.height,
+        child: getAuthenticatedWidget(context),
+      ),
+    );
   }
 
   Widget getAuthenticatedWidget(BuildContext context) {
