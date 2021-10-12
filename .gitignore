@@ -44,3 +44,5 @@ app.*.map.json
 android
 assets
 ios
+
+lib/magic_box.dart
