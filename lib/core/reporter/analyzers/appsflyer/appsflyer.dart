@@ -12,11 +12,11 @@ mixin AppsFlyerMixin {
     };
 
     appsFlyerSdk = AppsflyerSdk(appsFlyerOptions);
-    final response = await appsFlyerSdk.initSdk();
+    await appsFlyerSdk.initSdk();
   }
 
   Future<void> appsFlyerLogBottomBarEvent({required Map<String, dynamic> data}) async {
-    final bool? result = await appsFlyerSdk.logEvent(
+    await appsFlyerSdk.logEvent(
       EventKeys.shared.bottomNavigationBarButton,
       data,
     );
