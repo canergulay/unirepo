@@ -1,9 +1,10 @@
 import 'package:qonversion_flutter/qonversion_flutter.dart';
+import 'package:unirepo/magic_box.dart';
 
 mixin QonversionMixin {
   Future<void> initQonversion() async {
     final QLaunchResult launchResult = await Qonversion.launch(
-      'PV77YHL7qnGvsdmpTs7gimsxUvY-Znl2',
+      MagicBox.shared.qonversionProjectKey,
       isObserveMode: false,
     );
   }
