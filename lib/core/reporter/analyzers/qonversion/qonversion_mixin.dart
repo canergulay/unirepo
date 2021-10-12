@@ -7,4 +7,6 @@ mixin QonversionMixin {
       isObserveMode: false,
     );
   }
+
+  Future<void> qonversionsLogBottomBarEvent({required Map<String, dynamic> data}) async {}
 }

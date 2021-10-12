@@ -9,7 +9,6 @@ mixin AppsFlyerMixin {
     Map<String, dynamic> appsFlyerOptions = {
       "afDevKey": MagicBox.shared.appsflyerDevKey,
       "afAppId": MagicBox.shared.appsflyerAppId,
-      "isDebug": true,
     };
 
     appsFlyerSdk = AppsflyerSdk(appsFlyerOptions);
@@ -17,7 +16,7 @@ mixin AppsFlyerMixin {
   }
 
   Future<void> appsFlyerLogBottomBarEvent({required Map<String, dynamic> data}) async {
-    await appsFlyerSdk.logEvent(
+    final bool? result = await appsFlyerSdk.logEvent(
       EventKeys.shared.bottomNavigationBarButton,
       data,
     );
