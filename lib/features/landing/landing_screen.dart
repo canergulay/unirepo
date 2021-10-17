@@ -8,7 +8,7 @@ import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dar
 import 'package:unirepo/features/home/presentation/pages/home_screen.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 import 'package:unirepo/features/landing/screens.dart';
-import 'package:unirepo/features/landing/widgets/bottom_navigation_bar/bototm_navigation_provider.dart';
+import 'package:unirepo/features/landing/widgets/bottom_navigation_bar/bottom_navigation_provider.dart';
 import 'package:unirepo/features/landing/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:unirepo/features/user/utils/main_providers.dart';
 

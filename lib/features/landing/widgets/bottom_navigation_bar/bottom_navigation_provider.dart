@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:unirepo/core/reporter/report_manager.dart';
 
 class BottomNavigationProvider extends ChangeNotifier {
   int bottomNavigationState = 0;
@@ -20,8 +19,5 @@ class BottomNavigationProvider extends ChangeNotifier {
     } else {
       buttonValue = 'home_page';
     }
-    ReportManager.instance.logBottomNavbarEventCollective(
-      data: {'pressed_button': buttonValue},
-    );
   }
 }
