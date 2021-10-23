@@ -9,4 +9,6 @@ class AssetPaths {
   final String university = "assets/icons/university.png";
   final String login = "assets/icons/login.png";
   final String verify = "assets/icons/verify.png";
+  final String coin = "assets/icons/coin.png";
+  final String gallery = "assets/icons/gallery.png";
 }
