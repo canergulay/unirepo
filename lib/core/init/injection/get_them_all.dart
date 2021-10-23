@@ -9,10 +9,13 @@ import 'package:unirepo/features/home/domain/usecases/cache_retrieve_universitie
 import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 import 'package:unirepo/features/home/domain/usecases/get_universities.dart';
+import 'package:unirepo/features/user/data/datasources/get_user_info_datasource.dart';
 import 'package:unirepo/features/user/data/datasources/login_with_email_password.dart';
 import 'package:unirepo/features/user/data/datasources/register_with_email_password_firebase_ds.dart';
+import 'package:unirepo/features/user/data/repositories/get_user_info_repositary.dart';
 import 'package:unirepo/features/user/data/repositories/login_with_email_password_repositary.dart';
 import 'package:unirepo/features/user/data/repositories/register_with_email_password_repositary.dart';
+import 'package:unirepo/features/user/domain/usecases/get_user_info.dart';
 import 'package:unirepo/features/user/domain/usecases/login_with_email_password.dart';
 import 'package:unirepo/features/user/domain/usecases/register_with_email_password.dart';
 
@@ -24,6 +27,7 @@ void setUp() {
   _setupGetNotesModule();
   _setupRegistrationModule();
   _setupLoginModule();
+  _registerUserProfileModule();
 }
 
 void _setupGetAllUniversitiesModule() {
@@ -66,4 +70,10 @@ void _setupLoginModule() {
   injector.registerLazySingleton<LoginWithEmailPasswordFirebaseDS>(
     () => LoginWithEmailPasswordFirebaseDS(),
   );
+}
+
+void _registerUserProfileModule() {
+  injector.registerLazySingleton<GetUserInfo>(() => GetUserInfo(getUserInfoRepositary: injector()));
+  injector.registerLazySingleton<GetUserInfoRepositary>(() => GetUserInfoRepositary(getUserInfoDataSource: injector()));
+  injector.registerLazySingleton<GetUserInfoDataSource>(() => GetUserInfoDataSource());
 }

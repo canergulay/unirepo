@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unirepo/core/components/dialogs/ok_cancel_dialog.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/core/freezed/fetch_state/fetch_state.dart';
 import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
@@ -18,7 +19,7 @@ class SearchBarProvider extends ChangeNotifier {
   final GetSupportedPrefices getSupportedPrefices;
   final GetNotes getNotes;
   bool isUniversityPicked = false;
-  late final University universityPicked;
+  University universityPicked = University();
   SearchBarProvider({
     required this.getSupportedPrefices,
     required this.getNotes,
@@ -118,11 +119,15 @@ class SearchBarProvider extends ChangeNotifier {
         context: context,
         builder: (context) {
           return OkCancelDialog(
-              title: ' 1 ',
-              explanation: ' 2 ',
+              title: SentenceRepositary.shared.uniContainerDialogTitle,
+              explanation: SentenceRepositary.shared.uniContainerDialogExplanation,
               context: context,
               result: (bool isOk) {
-                print(isOk);
+                Navigator.of(context).pop();
+                if (isOk) {
+                  isUniversityPicked = false;
+                  notifyListeners();
+                }
               });
         });
   }

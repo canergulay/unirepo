@@ -11,4 +11,6 @@ class SentenceRepositary {
   final String login = ' Giriş yap';
   final String forgetpw = 'Şifreni mi unuttun ?';
   final String dontHaveAcc = "Henüz hesap oluşturmadın mı ? ";
+  final String uniContainerDialogTitle = "Diğer üniversitelere göz atmak mı istiyorsunuz ? ";
+  final String uniContainerDialogExplanation = " Seçmiş olduğunuz üniversiteyi kaybedeceksiniz, tekrar seçmeyi unutmayın. ";
 }

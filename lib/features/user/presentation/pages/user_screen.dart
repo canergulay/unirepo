@@ -6,6 +6,9 @@ import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/components/widgets/main_textfield.dart';
 import 'package:unirepo/core/constants/asset_paths.dart';
 import 'package:unirepo/core/constants/sentence_repositary.dart';
+import 'package:unirepo/core/init/injection/get_them_all.dart';
+import 'package:unirepo/features/user/domain/usecases/get_user_info.dart';
+import 'package:unirepo/features/user/presentation/provider/user_provider.dart';
 import 'package:unirepo/features/user/presentation/widgets/authenticated/authenticated.dart';
 import 'package:unirepo/features/user/presentation/widgets/needs_verification/needs_verification.dart';
 import 'package:unirepo/features/user/presentation/widgets/unauthenticated/register/register_info_title.dart';
@@ -22,12 +25,8 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: context.height,
-        width: context.width,
-        child: getAuthenticatedWidget(context),
-      ),
+    return SizedBox(
+      child: getAuthenticatedWidget(context),
     );
   }
 
@@ -39,7 +38,10 @@ class _UserScreenState extends State<UserScreen> {
         return const UnAuthenticated();
       },
       authenticated: (User user) {
-        return const Authenticated();
+        return ChangeNotifierProvider(
+          create: (context) => UserProfileProvider(getUserInfo: injector.get<GetUserInfo>()),
+          child: const Authenticated(),
+        );
       },
       needsverification: (User user) {
         return const NeedsVerification();
