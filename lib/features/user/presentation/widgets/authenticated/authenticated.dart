@@ -103,7 +103,7 @@ class _AuthenticatedState extends State<Authenticated> {
             right: 0,
             child: AnimatorButton(
               onPressed: () {},
-              upperBound: 0.5,
+              upperBound: 0.45,
               childToBeAnimated: Image.asset(
                 AssetPaths.instance.gallery,
                 height: context.limitedheightUnit * 5,
