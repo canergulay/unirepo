@@ -43,3 +43,10 @@ extension LimitedSizeUnitExtension on BuildContext {
   double get limitedheightUnit => dynamicHeight / 100 < 10 ? dynamicHeight / 100 : 10;
   double get limitedwidthUnit => dynamicWidth / 100 < 10 ? dynamicHeight / 100 : 10;
 }
+
+extension PaddingValues on BuildContext {
+  double get lowPadding => heightUnit * 2;
+  double get mediumPadding => heightUnit * 4;
+  double get highPadding => heightUnit * 6;
+  double get extremePadding => heightUnit * 8;
+}

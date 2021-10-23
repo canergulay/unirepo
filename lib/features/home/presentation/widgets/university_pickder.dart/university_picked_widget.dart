@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unirepo/core/components/buttons/animator_button.dart';
 import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
@@ -72,16 +73,22 @@ class _UniversityPickedState extends State<UniversityPicked> with SingleTickerPr
         });
   }
 
-  Container pickedUniversityContainer(BuildContext context, SearchBarProvider provider) {
-    return Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.only(top: context.limitedheightUnit * 6, left: context.limitedwidthUnit * 3, right: context.limitedwidthUnit * 3),
-        decoration: simpleShadowDecoration(context), // nothing but a smooth box decoration that contains a single box shadow and border radius.
-        padding: EdgeInsets.symmetric(
-          vertical: context.limitedheightUnit * 2,
-          horizontal: context.limitedwidthUnit * 5,
-        ),
-        child: universityText(provider, context));
+  AnimatorButton pickedUniversityContainer(BuildContext context, SearchBarProvider provider) {
+    return AnimatorButton(
+      onPressed: () {
+        provider.onSearchBarTapped(context);
+      },
+      upperBound: 0.25,
+      childToBeAnimated: Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: context.limitedheightUnit * 6, left: context.limitedwidthUnit * 3, right: context.limitedwidthUnit * 3),
+          decoration: simpleShadowDecoration(context), // nothing but a smooth box decoration that contains a single box shadow and border radius.
+          padding: EdgeInsets.symmetric(
+            vertical: context.limitedheightUnit * 2,
+            horizontal: context.limitedwidthUnit * 5,
+          ),
+          child: universityText(provider, context)),
+    );
   }
 
   AutoSizeText universityText(SearchBarProvider provider, BuildContext context) {

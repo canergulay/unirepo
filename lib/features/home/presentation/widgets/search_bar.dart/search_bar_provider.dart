@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unirepo/core/components/dialogs/ok_cancel_dialog.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
 import 'package:unirepo/core/freezed/fetch_state/fetch_state.dart';
 import 'package:unirepo/core/freezed/result/result.dart';
@@ -110,6 +111,20 @@ class SearchBarProvider extends ChangeNotifier {
     }, error: (Exception e) {
       noteState = FetchState.error(e);
     });
+  }
+
+  Future<void> onSearchBarTapped(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return OkCancelDialog(
+              title: ' 1 ',
+              explanation: ' 2 ',
+              context: context,
+              result: (bool isOk) {
+                print(isOk);
+              });
+        });
   }
 
   Future<void> getNotesByPrefix(String prefixID) async {
