@@ -7,8 +7,10 @@ import 'package:unirepo/features/user/domain/usecases/register_with_email_passwo
 
 class RegisterManager {
   final AuthenticationProvider authenticationProvider;
-  final RegisterWithEmailPassword registerWithEmailPassword = injector.get<RegisterWithEmailPassword>();
-  RegisterManager({required this.authenticationProvider});
+  late final RegisterWithEmailPassword _registerWithEmailPassword;
+  RegisterManager({required this.authenticationProvider}) {
+    _registerWithEmailPassword = injector.get<RegisterWithEmailPassword>();
+  }
 
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController mailController = TextEditingController();
@@ -16,7 +18,7 @@ class RegisterManager {
   final formKey = GlobalKey<FormState>();
 
   Future<void> register({required RegistrationEntity registrationEntity}) async {
-    final Result<bool, Exception> result = await registerWithEmailPassword(registrationEntity);
+    final Result<bool, Exception> result = await _registerWithEmailPassword(registrationEntity);
     print('burası');
     result.when(
         success: (bool sonuc) {},
@@ -33,7 +35,7 @@ class RegisterManager {
         password: passwordController.text,
         userName: userNameController.text,
       );
-      registerWithEmailPassword(registrationEntity);
+      _registerWithEmailPassword(registrationEntity);
     } else {}
   }
 }

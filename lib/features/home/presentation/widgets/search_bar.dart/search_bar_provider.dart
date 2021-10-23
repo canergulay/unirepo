@@ -11,8 +11,8 @@ import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';
 
 class SearchBarProvider extends ChangeNotifier {
-  CoursePrefixState coursePrefixState = const CoursePrefixState.loading();
-  FetchState<List<Note>, Exception> noteState = const FetchState.loading();
+  CoursePrefixState coursePrefixState = CoursePrefixState.loading();
+  FetchState<List<Note>, Exception> noteState = FetchState.loading();
 
   final GetSupportedPrefices getSupportedPrefices;
   final GetNotes getNotes;
@@ -110,6 +110,23 @@ class SearchBarProvider extends ChangeNotifier {
     }, error: (Exception e) {
       noteState = FetchState.error(e);
     });
+  }
+
+  Future<void> getNotesByPrefix(String prefixID) async {
+    noteState = FetchState.loading();
+    notifyListeners();
+
+    final Result<List<Note>, Exception> result = await getNotes.getNotesByPrefix(
+      universityID: universityPicked.id ?? '',
+      prefixID: prefixID,
+    );
+
+    result.when(
+        success: (List<Note> notess) {
+          noteState = FetchState.loaded(notess);
+          notifyListeners();
+        },
+        error: (Exception e) {});
   }
 }
 

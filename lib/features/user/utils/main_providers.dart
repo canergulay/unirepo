@@ -28,7 +28,10 @@ class MainProviders {
               authenticationProvider: context.read<AuthenticationProvider>(),
             ),
           ),
-          Provider(create: (context) => LoginManager()),
+          Provider(
+              create: (context) => LoginManager(
+                    authenticationProvider: context.read<AuthenticationProvider>(),
+                  )),
         ],
         child: child,
       );

@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:unirepo/core/freezed/authentication_state/authentication_state.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
-  AuthenticationState authenticationState = AuthenticationState.unauthenticated();
+  AuthenticationState authenticationState = const AuthenticationState.unauthenticated();
+
   final _firebaseAuth = FirebaseAuth.instance;
   AuthenticationProvider() {
     // SOME CACHE CONTROLS, WE WILL CHECK IF OUR USER HAS LOGGED IN BEFORE, HAS A VALID TOKEN OR NOT

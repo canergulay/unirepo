@@ -16,8 +16,8 @@ abstract class _SearchMobx with Store {
   final GetUniversities _getUniversities = injector.get<GetUniversities>();
   final CacheRetrieveUniversities _cacheRetrieveUniversities = injector.get<CacheRetrieveUniversities>();
   final GetNotes _getNotes = injector.get<GetNotes>();
-  bool _isCachedDataControlled = false;
 
+  bool _isCachedDataControlled = false;
   late final _universitiesStored;
 
   @observable

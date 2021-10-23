@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/home/data/datasources/get_schools_datasource.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
@@ -24,9 +25,11 @@ class GetUniversitiesRepositary implements GetAllUniversitiesRepositaryContract 
     try {
       final response = await readUniversities.getSingleDocumentWithDocumentId(docId: docID);
       final List<dynamic> documentReferences = response['courses'];
+
       final List<CoursePrefix> coursePrefices = await coursePrefixGetter(documentReferences);
       return Result.success(coursePrefices);
     } catch (e) {
+      print(e);
       return Result.error(Exception('houston we got a problem!'));
     }
   }
@@ -35,7 +38,10 @@ class GetUniversitiesRepositary implements GetAllUniversitiesRepositaryContract 
     final List<CoursePrefix> _coursePreficesToBeReturned = [];
     for (var coursePrefix in courseDocumentList) {
       final supportedPrefix = await coursePrefix.get();
-      _coursePreficesToBeReturned.add(CoursePrefix.fromJson(supportedPrefix.data()));
+      _coursePreficesToBeReturned.add(CoursePrefix(
+        prefix: supportedPrefix['prefix'],
+        id: coursePrefix.id,
+      ));
     }
     return _coursePreficesToBeReturned;
   }

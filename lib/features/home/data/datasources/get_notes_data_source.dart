@@ -19,6 +19,18 @@ class GetNotesDataSource with GetDocumentsMixin<Note> {
     final List<Note> notes = await parseThem(rawDocuments);
     return notes;
   }
+
+  Future<List<Note>> getNotesByPrefix(String universityID, String prefixID) async {
+    var rawDocuments = await getRawDocumentsMultiWhere(
+      responseType: Note(),
+      whereField: 'university_id',
+      isEqualTo: FirebaseFirestore.instance.collection('univercities').doc(universityID),
+      whereField2: 'course_prefix',
+      isEqualTo2: FirebaseFirestore.instance.collection('courses').doc(prefixID),
+    );
+    final List<Note> notes = await parseThem(rawDocuments);
+    return notes;
+  }
 }
 
 Future<List<Note>> parseThem(QuerySnapshot<Map<String, dynamic>> rawDocuments) async {

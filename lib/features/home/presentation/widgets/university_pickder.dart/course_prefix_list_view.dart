@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unirepo/core/components/buttons/animator_button.dart';
 import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
+import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
+import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 
 class CoursePrefixListView extends StatefulWidget {
   final List<CoursePrefix> coursePrefices;
@@ -17,7 +20,7 @@ class CoursePrefixListView extends StatefulWidget {
 }
 
 class _CoursePrefixListViewState extends State<CoursePrefixListView> {
-  int _selectedState = 1;
+  int _selectedState = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,6 +52,7 @@ class _CoursePrefixListViewState extends State<CoursePrefixListView> {
       );
 
   void changeButtonState(int index) {
+    context.read<SearchBarProvider>().getNotesByPrefix(widget.coursePrefices[index].id ?? '');
     setState(() {
       _selectedState = index;
     });

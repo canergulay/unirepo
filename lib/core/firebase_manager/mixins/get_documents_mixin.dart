@@ -24,4 +24,26 @@ mixin GetDocumentsMixin<T extends MapConverter> {
         .get();
     return response;
   }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getRawDocumentsMultiWhere({
+    required T responseType,
+    required String whereField,
+    required Object isEqualTo,
+    required String whereField2,
+    required Object isEqualTo2,
+    bool descending = false,
+  }) async {
+    final response = await FirebaseFirestore.instance
+        .collection(FirebaseCollectionPaths.getCollectionName<T>())
+        .where(
+          whereField,
+          isEqualTo: isEqualTo,
+        )
+        .where(
+          whereField2,
+          isEqualTo: isEqualTo2,
+        )
+        .get();
+    return response;
+  }
 }

@@ -17,13 +17,5 @@ class BottomNavigationProvider extends ChangeNotifier {
     } else {
       buttonValue = 'home_page';
     }
-<<<<<<< HEAD:lib/features/landing/widgets/bottom_navigation_bar/bottom_navigation_provider.dart
-<<<<<<< HEAD:lib/features/landing/widgets/bottom_navigation_bar/bottom_navigation_provider.dart
-=======
-    ReportManager.instance.logBottomNavbarEventCollective(data: {'pressed_button': buttonValue});
->>>>>>> parent of 4d0ebbd... info added:lib/features/landing/widgets/bottom_navigation_bar/bototm_navigation_provider.dart
-=======
-    ReportManager.instance.logBottomNavbarEventCollective(data: {'pressed_button': buttonValue});
->>>>>>> parent of 4d0ebbd... info added:lib/features/landing/widgets/bottom_navigation_bar/bototm_navigation_provider.dart
   }
 }

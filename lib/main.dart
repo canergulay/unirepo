@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
@@ -13,7 +15,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   getItStarter.setUp();
-
   await Hive.initFlutter();
   Hive.registerAdapter(UniversityAdapter());
   runApp(MyApp());

@@ -25,6 +25,7 @@ class _UserScreenState extends State<UserScreen> {
     return SingleChildScrollView(
       child: SizedBox(
         height: context.height,
+        width: context.width,
         child: getAuthenticatedWidget(context),
       ),
     );

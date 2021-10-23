@@ -18,4 +18,15 @@ class GetNotesRepositary implements GetNotesRepositaryContract {
       return Result.error(Exception());
     }
   }
+
+  @override
+  Future<Result<List<Note>, Exception>> getNotesByPrefix(String universityID, String prefixID) async {
+    try {
+      final List<Note> notes = await getNotesDataSourse.getNotesByPrefix(universityID, prefixID);
+      return Result.success(notes);
+    } catch (e) {
+      print(e);
+      return Result.error(Exception());
+    }
+  }
 }
