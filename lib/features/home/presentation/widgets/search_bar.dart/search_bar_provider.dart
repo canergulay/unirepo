@@ -116,17 +116,21 @@ class SearchBarProvider extends ChangeNotifier {
     noteState = FetchState.loading();
     notifyListeners();
 
-    final Result<List<Note>, Exception> result = await getNotes.getNotesByPrefix(
-      universityID: universityPicked.id ?? '',
-      prefixID: prefixID,
-    );
+    if (prefixID != 'all') {
+      final Result<List<Note>, Exception> result = await getNotes.getNotesByPrefix(
+        universityID: universityPicked.id ?? '',
+        prefixID: prefixID,
+      );
 
-    result.when(
-        success: (List<Note> notess) {
-          noteState = FetchState.loaded(notess);
-          notifyListeners();
-        },
-        error: (Exception e) {});
+      result.when(
+          success: (List<Note> notess) {
+            noteState = FetchState.loaded(notess);
+          },
+          error: (Exception e) {});
+    } else {
+      await _getInitialNotes(universityPicked.id);
+    }
+    notifyListeners();
   }
 }
 

@@ -148,5 +148,5 @@ Row titleText(Note note, BuildContext context) {
 }
 
 double containerHeightGetter(BuildContext context) {
-  return context.limitedheightUnit * 18;
+  return context.limitedheightUnit * 20;
 }
