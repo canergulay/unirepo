@@ -4,6 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/core/constants/navigation_constants.dart';
+import 'package:unirepo/core/init/navigation_manager/navigation_manager.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 
 import 'core/init/injection/get_them_all.dart' as getItStarter;
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeManager.create(AppThemeLight()),
       title: 'Material App',
-      home: const LandingScreen(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: NavigationConstants.base,
     );
   }
 }

@@ -11,4 +11,11 @@ class AssetPaths {
   final String verify = "assets/icons/verify.png";
   final String coin = "assets/icons/coin.png";
   final String gallery = "assets/icons/gallery.png";
+
+  final String contact = "assets/icons/contact.png";
+  final String notes = "assets/icons/notes.png";
+  final String yournotes = "assets/icons/yournotes.png";
+  final String settings = "assets/icons/settings.png";
+  final String purchase = "assets/icons/purchase.png";
+  final String arrow = "assets/icons/arrow.png";
 }

@@ -13,4 +13,9 @@ class SentenceRepositary {
   final String dontHaveAcc = "Henüz hesap oluşturmadın mı ? ";
   final String uniContainerDialogTitle = "Diğer üniversitelere göz atmak mı istiyorsunuz ? ";
   final String uniContainerDialogExplanation = " Seçmiş olduğunuz üniversiteyi kaybedeceksiniz, tekrar seçmeyi unutmayın. ";
+  final String notes = 'Eriştiğin notlar';
+  final String yournotes = 'Yüklediğin notlar';
+  final String purchase = 'Kredi satın al';
+  final String settings = 'Hesap ayarları';
+  final String contact = "Bize ulaş";
 }

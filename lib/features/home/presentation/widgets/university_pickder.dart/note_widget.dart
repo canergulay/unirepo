@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:unirepo/core/components/buttons/animator_button.dart';
 import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
+import 'package:unirepo/core/constants/navigation_constants.dart';
 import 'package:unirepo/core/constants/palette.dart';
+import 'package:unirepo/core/init/navigation_manager/navigation_trigger.dart';
 import 'package:unirepo/core/utils/date_formatter.dart';
 import 'package:unirepo/features/home/data/models/note/note.dart';
 
-Container noteContainer(Note note, BuildContext context) => Container(
-      decoration: simpleShadowDecoration(context),
-      margin: EdgeInsets.symmetric(
-        horizontal: context.limitedwidthUnit * 2.31,
+AnimatorButton noteContainer(Note note, BuildContext context) => AnimatorButton(
+      upperBound: 0.2,
+      onPressed: () {
+        print('object');
+        NavigationTrigger.shared.push(context, path: NavigationConstants.note, args: note);
+      },
+      childToBeAnimated: Container(
+        decoration: simpleShadowDecoration(context),
+        margin: EdgeInsets.symmetric(
+          horizontal: context.limitedwidthUnit * 2.31,
+        ),
+        child: noteWidget(note, context),
       ),
-      child: noteWidget(note, context),
     );
 
 ClipRRect noteWidget(Note note, BuildContext context) => ClipRRect(
