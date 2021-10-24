@@ -18,4 +18,7 @@ class AssetPaths {
   final String settings = "assets/icons/settings.png";
   final String purchase = "assets/icons/purchase.png";
   final String arrow = "assets/icons/arrow.png";
+  final String lock = "assets/icons/lock.png";
+
+  final String pages = "assets/icons/pages.png";
 }

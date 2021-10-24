@@ -33,8 +33,9 @@ class LightColors implements IColors {
     bottomNavBarUnSelected = const Color(0xFFdbdbdb);
     colorScheme = const ColorScheme.light().copyWith(
       primary: Colors.white,
-      onPrimary: Colors.black12,
+      onPrimary: const Color(0xFF5A6988),
       onSecondary: colors.white,
+      secondary: const Color(0xFFCACBCE),
       secondaryVariant: const Color(0xFF01a7ef),
       primaryVariant: const Color(0xFF25c5fa),
       onSurface: colors.mediumGreyBold,

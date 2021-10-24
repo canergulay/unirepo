@@ -18,4 +18,6 @@ class SentenceRepositary {
   final String purchase = 'Kredi satın al';
   final String settings = 'Hesap ayarları';
   final String contact = "Bize ulaş";
+  final String activate = "Notu Aktifleştir";
+  final String sharedBy = " tarafından paylaşıldı.";
 }

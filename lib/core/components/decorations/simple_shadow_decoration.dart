@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-BoxDecoration simpleShadowDecoration(BuildContext context) {
+BoxDecoration simpleShadowDecoration(BuildContext context, {Color? color}) {
   return BoxDecoration(
     borderRadius: BorderRadius.circular(16),
-    color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+    color: color == null ? Theme.of(context).bottomNavigationBarTheme.backgroundColor : color,
     boxShadow: [
       BoxShadow(
         blurRadius: 10,
