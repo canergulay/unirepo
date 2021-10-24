@@ -208,7 +208,7 @@ class _AuthenticatedState extends State<Authenticated> {
             bottom: 0,
             right: 0,
             child: AnimatorButton(
-              onPressed: () {},
+              onPressed: context.read<UserProfileProvider>().changeUserProfile,
               upperBound: 0.50,
               childToBeAnimated: Image.asset(
                 AssetPaths.instance.gallery,
