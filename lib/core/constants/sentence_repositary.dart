@@ -20,4 +20,7 @@ class SentenceRepositary {
   final String contact = "Bize ulaş";
   final String activate = "Notu Aktifleştir";
   final String sharedBy = " tarafından paylaşıldı.";
+  final String cont = "Nota erişebilmek için aktifleştirmeniz gerekir.";
+  final String contExp = "* Notun tamamına sınırsız bir şekilde erişebileceksiniz! ";
+  final String activateError = "Notu görüntelemek için aktifleştirmeniz gerekiyor.";
 }

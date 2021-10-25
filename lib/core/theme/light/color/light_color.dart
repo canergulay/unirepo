@@ -35,6 +35,7 @@ class LightColors implements IColors {
       primary: Colors.white,
       onPrimary: const Color(0xFF5A6988),
       onSecondary: colors.white,
+      onError: Color(0xFFcc0000),
       secondary: const Color(0xFFCACBCE),
       secondaryVariant: const Color(0xFF01a7ef),
       primaryVariant: const Color(0xFF25c5fa),
