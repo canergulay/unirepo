@@ -10,6 +10,7 @@ import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/core/init/navigation_manager/navigation_trigger.dart';
 import 'package:unirepo/features/user/data/models/user_profile.dart';
 import 'package:unirepo/features/user/domain/usecases/get_user_info.dart';
+import 'package:unirepo/features/user/presentation/provider/avatar_provider.dart';
 import 'package:unirepo/features/user/presentation/provider/user_provider.dart';
 
 class Authenticated extends StatefulWidget {
@@ -23,6 +24,7 @@ class _AuthenticatedState extends State<Authenticated> {
   @override
   void initState() {
     context.read<UserProfileProvider>().activateUserProfile();
+    context.read<AvatarProvider>().getuserAvatar();
     super.initState();
   }
 
@@ -54,7 +56,11 @@ class _AuthenticatedState extends State<Authenticated> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              userAvatar(userData, context),
+              Consumer(
+                builder: (context, provide, widget) {
+                  return userAvatar(userData, context);
+                },
+              ),
               SizedBox(height: context.limitedheightUnit * 2),
               Text(userData.name ?? '', style: Theme.of(context).textTheme.headline5),
               SizedBox(height: context.limitedheightUnit * 2),
@@ -194,28 +200,30 @@ class _AuthenticatedState extends State<Authenticated> {
     );
   }
 
-  Stack userAvatar(UserProfile userData, BuildContext context) {
-    return Stack(
-      children: [
-        CircleAvatar(
-          backgroundColor: Colors.black26,
-          backgroundImage: NetworkImage(
-            userData.picture ?? '',
-          ),
-          radius: context.heightUnit * 9,
-        ),
-        Positioned(
-            bottom: 0,
-            right: 0,
-            child: AnimatorButton(
-              onPressed: context.read<UserProfileProvider>().changeUserProfile,
-              upperBound: 0.50,
-              childToBeAnimated: Image.asset(
-                AssetPaths.instance.gallery,
-                height: context.limitedheightUnit * 5,
+  Widget userAvatar(UserProfile userData, BuildContext context) {
+    return context.watch<AvatarProvider>().avatarURL != null
+        ? Stack(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.black26,
+                backgroundImage: NetworkImage(
+                  context.watch<AvatarProvider>().avatarURL ?? '',
+                ),
+                radius: context.heightUnit * 9,
               ),
-            )),
-      ],
-    );
+              Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: AnimatorButton(
+                    onPressed: context.read<AvatarProvider>().changeUserAvatar,
+                    upperBound: 0.50,
+                    childToBeAnimated: Image.asset(
+                      AssetPaths.instance.gallery,
+                      height: context.limitedheightUnit * 5,
+                    ),
+                  )),
+            ],
+          )
+        : CircularProgressIndicator();
   }
 }

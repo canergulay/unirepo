@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,38 +13,54 @@ import 'package:unirepo/features/note/presentation/provider/note_page_provider.d
 
 CarouselSlider notesTopSlider(BuildContext context, {required Note note}) {
   return CarouselSlider(
-    options: CarouselOptions(
-      scrollPhysics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      height: context.dynamicHeight * 0.30,
-      enableInfiniteScroll: false,
-      initialPage: context.read<NotesPageViewProvider>().sliderState,
-      viewportFraction: 0.6,
-      autoPlayInterval: const Duration(seconds: 2),
-      autoPlayCurve: Curves.easeIn,
-      onPageChanged: (index, reason) {
-        context.read<NotesPageViewProvider>().updateSlider(index);
-      },
-      enlargeCenterPage: true,
-    ),
-    items: note.documents?.map((i) {
-      return imageContainer(i);
-    }).toList(),
-  );
+      options: CarouselOptions(
+        scrollPhysics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        height: context.dynamicHeight * 0.30,
+        enableInfiniteScroll: false,
+        initialPage: context.read<NotesPageViewProvider>().sliderState,
+        viewportFraction: 0.6,
+        autoPlayInterval: const Duration(seconds: 2),
+        autoPlayCurve: Curves.easeIn,
+        onPageChanged: (index, reason) {
+          context.read<NotesPageViewProvider>().updateSlider(index);
+        },
+        enlargeCenterPage: true,
+      ),
+      items: [
+        for (var i = 0; i < note.documents!.length; i++) imageContainer(note.documents?[i], i == note.documents!.length - 1, context),
+      ]);
 }
 
-Container imageContainer(String? image) {
+Container imageContainer(String? image, bool isLastOne, BuildContext context) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 5.0),
-    decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-            image ?? '',
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+              image ?? '',
+            ),
+            fit: BoxFit.cover,
           ),
-          fit: BoxFit.cover,
+          borderRadius: BorderRadius.circular(Palette.instance.borderRadiusPlus),
+          boxShadow: [BoxShadow(blurRadius: 7, spreadRadius: 2, color: Colors.black.withAlpha(10))]),
+      child: Visibility(
+        visible: isLastOne,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(),
+            Image.asset(
+              AssetPaths.instance.lock,
+              scale: 6,
+            ),
+            Container(
+              child: Text('continue!'),
+              width: double.infinity,
+            )
+          ],
         ),
-        borderRadius: BorderRadius.circular(Palette.instance.borderRadiusPlus),
-        boxShadow: [BoxShadow(blurRadius: 7, spreadRadius: 2, color: Colors.black.withAlpha(10))]),
-  );
+      ));
 }
 
 Consumer<NotesPageViewProvider> smoothIndicator() {

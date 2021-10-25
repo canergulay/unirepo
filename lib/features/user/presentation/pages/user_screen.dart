@@ -8,6 +8,7 @@ import 'package:unirepo/core/constants/asset_paths.dart';
 import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/core/init/injection/get_them_all.dart';
 import 'package:unirepo/features/user/domain/usecases/get_user_info.dart';
+import 'package:unirepo/features/user/presentation/provider/avatar_provider.dart';
 import 'package:unirepo/features/user/presentation/provider/user_provider.dart';
 import 'package:unirepo/features/user/presentation/widgets/authenticated/authenticated.dart';
 import 'package:unirepo/features/user/presentation/widgets/needs_verification/needs_verification.dart';
@@ -38,10 +39,15 @@ class _UserScreenState extends State<UserScreen> {
         return const UnAuthenticated();
       },
       authenticated: (User user) {
-        return ChangeNotifierProvider(
-          create: (context) => UserProfileProvider(getUserInfo: injector.get<GetUserInfo>()),
-          child: const Authenticated(),
-        );
+        return MultiProvider(providers: [
+          ChangeNotifierProvider(create: (context) => AvatarProvider()),
+          ChangeNotifierProvider(
+            create: (context) => UserProfileProvider(
+              getUserInfo: injector.get<GetUserInfo>(),
+              avatarProvider: context.read<AvatarProvider>(),
+            ),
+          ),
+        ], child: const Authenticated());
       },
       needsverification: (User user) {
         return const NeedsVerification();

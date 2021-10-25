@@ -9,11 +9,16 @@ import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/features/user/data/models/user_profile.dart';
 import 'package:unirepo/features/user/domain/usecases/get_user_info.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:unirepo/features/user/presentation/provider/avatar_provider.dart';
 
 class UserProfileProvider extends ChangeNotifier {
+  final AvatarProvider avatarProvider;
   final GetUserInfo getUserInfo;
   UserProfile? userProfile;
-  UserProfileProvider({required this.getUserInfo});
+  UserProfileProvider({
+    required this.getUserInfo,
+    required this.avatarProvider,
+  });
 
   Future<void> activateUserProfile() async {
     Result<UserProfile, Exception> result = await getUserInfo();
@@ -27,25 +32,4 @@ class UserProfileProvider extends ChangeNotifier {
 
   bool get hasProfileData => userProfile != null;
   UserProfile get userData => userProfile!;
-
-  Future<void> changeUserProfile() async {
-    final ImagePicker _picker = ImagePicker();
-    try {
-      XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        final Result<String, Exception> uploadResult = await FireBaseManager.instance.uploadImage(
-          pickedImage.path,
-          dirName: FireBaseDirNames.shared.avatars,
-          fileName: FirebaseAuth.instance.currentUser?.uid ?? '',
-        );
-        uploadResult.when(success: (String path) async {
-          final String downloadURL = await FirebaseStorage.instance.ref(path).getDownloadURL();
-        }, error: (Exception e) {
-          print(e);
-        });
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 }
