@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeManager.create(AppThemeLight()),
-      title: 'Material App',
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: NavigationConstants.base,
     );

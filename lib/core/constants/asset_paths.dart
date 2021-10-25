@@ -6,7 +6,7 @@ class AssetPaths {
   final String home = "assets/icons/home.png";
   final String user = "assets/icons/user.png";
   final String search = "assets/icons/search.png";
-  final String university = "assets/icons/university.png";
+  final String university = "assets/illustrations/university.jpg";
   final String login = "assets/icons/login.png";
   final String verify = "assets/icons/verify.png";
   final String coin = "assets/icons/coin.png";
@@ -21,4 +21,7 @@ class AssetPaths {
   final String lock = "assets/icons/lock.png";
 
   final String pages = "assets/icons/pages.png";
+  final String upArrow = "assets/icons/up-arrow.png";
+
+  final String empty = "assets/illustrations/empty.png";
 }

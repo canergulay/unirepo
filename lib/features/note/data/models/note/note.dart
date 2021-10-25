@@ -14,6 +14,7 @@ class Note implements MapConverter {
   final String? explanation;
   final User? user;
   final String? title;
+  final int? kredi;
   final int? numberOfNotes;
   final DateTime? created;
   final String? universityId;
@@ -23,6 +24,7 @@ class Note implements MapConverter {
       this.coursePrefix,
       this.documents,
       this.created,
+      this.kredi,
       this.explanation,
       this.title,
       this.universityId,

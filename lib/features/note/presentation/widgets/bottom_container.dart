@@ -5,7 +5,7 @@ import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dar
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/constants/asset_paths.dart';
 import 'package:unirepo/core/constants/sentence_repositary.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 
 Stack bottomContainer(BuildContext context, Note note) {
   return Stack(

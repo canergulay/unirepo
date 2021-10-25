@@ -7,7 +7,7 @@ import 'package:unirepo/core/freezed/result/result.dart';
 import 'package:unirepo/core/local_manager/hive_manager.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix_result.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/home/domain/usecases/get_notes.dart';
 import 'package:unirepo/features/home/domain/usecases/get_supported_prefices.dart';

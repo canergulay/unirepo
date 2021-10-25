@@ -1,6 +1,6 @@
 class AppConstants {
   static var shared = AppConstants();
-
+  final String appName = 'UniRepo';
   final String hiveAppBox = 'app';
   final String hiveIsCachedKey = 'iscached';
   final String hivePickedUniversityKey = 'picked';

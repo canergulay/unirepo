@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unirepo/core/constants/navigation_constants.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 import 'package:unirepo/features/landing/landing_screen.dart';
 import 'package:unirepo/features/note/presentation/pages/note_screen.dart';
 import 'package:unirepo/features/note/presentation/provider/note_page_provider.dart';

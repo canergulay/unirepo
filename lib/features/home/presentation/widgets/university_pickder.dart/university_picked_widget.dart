@@ -5,11 +5,13 @@ import 'package:unirepo/core/components/buttons/animator_button.dart';
 import 'package:unirepo/core/components/decorations/simple_shadow_decoration.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/constants/app_constants.dart';
+import 'package:unirepo/core/constants/asset_paths.dart';
+import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
 import 'package:unirepo/features/home/presentation/mobx/search_mobx.dart';
 import 'package:unirepo/features/home/presentation/widgets/search_bar.dart/search_bar_provider.dart';
 import 'package:unirepo/features/home/presentation/widgets/university_pickder.dart/note_widget.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 
 import 'course_prefix_list_view.dart';
 
@@ -115,14 +117,40 @@ class _UniversityPickedState extends State<UniversityPicked> with SingleTickerPr
     return provider.noteState.when(loading: () {
       return const CircularProgressIndicator();
     }, loaded: (List<Note> notes) {
-      return ListView.builder(
-          shrinkWrap: true,
-          itemCount: notes.length,
-          itemBuilder: (context, index) {
-            return noteContainer(notes[index], context);
-          });
+      return getNotesOrEmpty(context, notes);
     }, error: (Exception e) {
       return const Text('error');
     });
   }
 }
+
+Widget getNotesOrEmpty(BuildContext context, List<Note> notes) {
+  if (notes.isNotEmpty) {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: notes.length,
+        itemBuilder: (context, index) {
+          return noteContainer(notes[index], context);
+        });
+  } else {
+    return notesEmptyContainer(context);
+  }
+}
+
+Container notesEmptyContainer(BuildContext context) => Container(
+      padding: EdgeInsets.symmetric(horizontal: context.limitedwidthUnit * 2),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.asset(
+            AssetPaths.instance.empty,
+            scale: 7,
+          ),
+          Text(
+            SentenceRepositary.shared.unfortunately,
+            style: Theme.of(context).textTheme.headline6,
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
+    );

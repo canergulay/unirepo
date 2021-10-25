@@ -6,7 +6,8 @@ import 'package:unirepo/core/constants/navigation_constants.dart';
 import 'package:unirepo/core/constants/palette.dart';
 import 'package:unirepo/core/init/navigation_manager/navigation_trigger.dart';
 import 'package:unirepo/core/utils/date_formatter.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+
+import 'package:unirepo/features/note/data/models/note/note.dart';
 
 AnimatorButton noteContainer(Note note, BuildContext context) => AnimatorButton(
       upperBound: 0.2,

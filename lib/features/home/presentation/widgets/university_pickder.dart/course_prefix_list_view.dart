@@ -25,12 +25,14 @@ class _CoursePrefixListViewState extends State<CoursePrefixListView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: context.limitedwidthUnit * 5, vertical: context.limitedheightUnit * 3),
-      child: ListView.builder(
-          itemCount: widget.coursePrefices.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return _builtItem(index);
-          }),
+      child: widget.coursePrefices.length > 1
+          ? ListView.builder(
+              itemCount: widget.coursePrefices.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return _builtItem(index);
+              })
+          : const SizedBox(),
     );
   }
 

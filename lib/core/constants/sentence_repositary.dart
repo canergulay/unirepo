@@ -23,4 +23,6 @@ class SentenceRepositary {
   final String cont = "Nota erişebilmek için aktifleştirmeniz gerekir.";
   final String contExp = "* Notun tamamına sınırsız bir şekilde erişebileceksiniz! ";
   final String activateError = "Notu görüntelemek için aktifleştirmeniz gerekiyor.";
+  final String pick = "Notları görüntüleyebilmek için kendi üniversiteni seçmelisin !";
+  final String unfortunately = "Ne yazık ki henüz kimse not yayınlamamış.";
 }

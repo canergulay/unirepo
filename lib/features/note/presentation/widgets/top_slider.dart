@@ -11,7 +11,7 @@ import 'package:unirepo/core/constants/asset_paths.dart';
 import 'package:unirepo/core/constants/palette.dart';
 import 'package:unirepo/core/constants/sentence_repositary.dart';
 import 'package:unirepo/core/utils/toast_manager.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 import 'package:unirepo/features/note/presentation/provider/note_page_provider.dart';
 
 CarouselSlider notesTopSlider(BuildContext context, {required Note note}) {

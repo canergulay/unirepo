@@ -5,7 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:unirepo/core/components/extensions/context_extension.dart';
 import 'package:unirepo/core/components/widgets/useful_appbar.dart';
 import 'package:unirepo/core/constants/palette.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 import 'package:unirepo/features/note/presentation/provider/note_page_provider.dart';
 import 'package:unirepo/features/note/presentation/widgets/bottom_container.dart';
 import 'package:unirepo/features/note/presentation/widgets/top_slider.dart';

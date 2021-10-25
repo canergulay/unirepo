@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unirepo/core/constants/palette.dart';
 import 'package:unirepo/core/firebase_manager/mixins/get_documents_mixin.dart';
 import 'package:unirepo/features/home/data/models/course_prefix/course_prefix.dart';
-import 'package:unirepo/features/home/data/models/note/note.dart';
+import 'package:unirepo/features/note/data/models/note/note.dart';
 import 'package:unirepo/features/home/data/models/university/university.dart';
 import 'package:unirepo/features/user/data/models/user.dart';
 

@@ -24,24 +24,26 @@ class GetUniversitiesRepositary implements GetAllUniversitiesRepositaryContract 
   Future<Result<List<CoursePrefix>, Exception>> getSupportedPrefices(String docID) async {
     try {
       final response = await readUniversities.getSingleDocumentWithDocumentId(docId: docID);
-      final List<dynamic> documentReferences = response['courses'];
+      final List<dynamic>? documentReferences = response['courses'];
 
-      final List<CoursePrefix> coursePrefices = await coursePrefixGetter(documentReferences);
-      return Result.success(coursePrefices);
+      final List<CoursePrefix>? coursePrefices = await coursePrefixGetter(documentReferences);
+      return Result.success(coursePrefices ?? []);
     } catch (e) {
       print(e);
       return Result.error(Exception('houston we got a problem!'));
     }
   }
 
-  Future<List<CoursePrefix>> coursePrefixGetter(List<dynamic> courseDocumentList) async {
+  Future<List<CoursePrefix>> coursePrefixGetter(List<dynamic>? courseDocumentList) async {
     final List<CoursePrefix> _coursePreficesToBeReturned = [];
-    for (var coursePrefix in courseDocumentList) {
-      final supportedPrefix = await coursePrefix.get();
-      _coursePreficesToBeReturned.add(CoursePrefix(
-        prefix: supportedPrefix['prefix'],
-        id: coursePrefix.id,
-      ));
+    if (courseDocumentList != null) {
+      for (var coursePrefix in courseDocumentList) {
+        final supportedPrefix = await coursePrefix.get();
+        _coursePreficesToBeReturned.add(CoursePrefix(
+          prefix: supportedPrefix['prefix'],
+          id: coursePrefix.id,
+        ));
+      }
     }
     return _coursePreficesToBeReturned;
   }
