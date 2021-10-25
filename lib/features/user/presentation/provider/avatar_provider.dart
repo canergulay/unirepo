@@ -14,7 +14,7 @@ class AvatarProvider extends ChangeNotifier with GetDefaultAvatar {
   // Then we'll be able to show either user's avatar or default avatar. That's all.
   String? avatarURL;
   AvatarProvider();
-
+  //
   Future<void> getuserAvatar() async {
     final Result<String, Exception> result = await FireBaseManager.instance.getImageFromStorage(
       dirName: FireBaseDirNames.shared.avatars,
